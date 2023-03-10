@@ -3,6 +3,7 @@ package com.sc2006.hawker.service;
 import com.sc2006.hawker.model.Hawker;
 import com.sc2006.hawker.model.Review;
 import com.sc2006.hawker.repository.ReviewRepository;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -48,15 +49,14 @@ public class ReviewService {
         return review;
     }
 
-
     /**
      * Delete review
-     * @param reviewBody - review body
      * @param serialno - serial number of hawker
-     * @return - updated review
+     * @param id - id of review
+     * @return - deleted review
      */
-    public Review deleteReview(String reviewBody, String serialno) {
-        Review review = reviewRepository.insert(new Review(reviewBody));
+    public Review deleteReview(String serialno, ObjectId id) {
+        Review review = reviewRepository.findById(id).get();
 
         mongoTemplate.update(Hawker.class)
                 .matching(Criteria.where("serialno").is(serialno))
@@ -65,5 +65,4 @@ public class ReviewService {
 
         return review;
     }
-
 }
