@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Hawkersv2Application {
+public class HawkerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Hawkersv2Application.class, args);
+		SpringApplication.run(HawkerApplication.class, args);
 	}
 
 }
