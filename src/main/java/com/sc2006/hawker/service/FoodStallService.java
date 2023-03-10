@@ -1,5 +1,7 @@
-package com.sc2006.hawker;
+package com.sc2006.hawker.service;
 
+import com.sc2006.hawker.model.FoodStall;
+import com.sc2006.hawker.repository.FoodStallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

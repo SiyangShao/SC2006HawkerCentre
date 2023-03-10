@@ -1,4 +1,4 @@
-package com.sc2006.hawker;
+package com.sc2006.hawker.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
