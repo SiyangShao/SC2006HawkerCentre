@@ -17,6 +17,6 @@ public class Rating {
     private integer rating;
 
     public Rating(integer rating) {
-        this.rating = rating;
+        this.rating = ratingBody;
     }
 }
