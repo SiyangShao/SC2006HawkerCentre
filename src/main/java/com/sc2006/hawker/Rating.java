@@ -14,9 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Rating {
     @Id
     private ObjectId id;
-    private integer rating;
+    private Integer rating;
 
-    public Rating(integer rating) {
+    public Rating(Integer rating) {
         this.rating = ratingBody;
     }
 }
