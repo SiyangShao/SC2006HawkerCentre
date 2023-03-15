@@ -21,35 +21,25 @@ public class Review {
     /**
      * The hawker that the review is about.
      */
-    @DocumentReference
-    private Hawker hawker;
+    private String hawkerSerialNo;
 
-    @DocumentReference
-    private FoodStall foodStall;
+    private String foodStallSerialNo;
 
     private void setSerialNo() {
-        this.serialNo = user.hashCode() + "" + hawker.hashCode();
+        this.serialNo = this.userName + "@@@" + this.hawkerSerialNo + "###" + this.foodStallSerialNo;
     }
 
-    public Review(String body, Integer rating, Hawker hawker, User user) {
+    public Review(String body, Integer rating, String hawkerSerialNo, String foodStallSerialNo, String userName) {
         this.body = body;
         this.rating = rating;
-        this.hawker = hawker;
-        this.user = user;
-        setSerialNo();
-    }
-
-    public Review(String body, Integer rating, FoodStall foodStall, User user) {
-        this.body = body;
-        this.rating = rating;
-        this.foodStall = foodStall;
-        this.user = user;
+        this.hawkerSerialNo = hawkerSerialNo;
+        this.foodStallSerialNo = foodStallSerialNo;
+        this.userName = userName;
         setSerialNo();
     }
 
     /**
      * The user who wrote the review.
      */
-    @DocumentReference
-    private User user;
+    private String userName;
 }

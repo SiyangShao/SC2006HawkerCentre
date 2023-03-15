@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,22 +31,20 @@ public class ReviewService {
     }
 
     /**
-     * Find review by id
-     *
-     * @param id id of review
-     * @return review
+     * Get all reviews
      */
-    public Optional<Review> findById(String id) {
-        return reviewRepository.findById(new ObjectId(id));
+    public List<Review> getAllReviews() {
+        return reviewRepository.findAll();
     }
 
     /**
-     * Find all reviews
+     * Get review by serial number
      *
-     * @return all reviews
+     * @param serialNo serial number
+     * @return review
      */
-    public Iterable<Review> findAll() {
-        return reviewRepository.findAll();
+    public Optional<Review> getReviewBySerialNo(String serialNo) {
+        return reviewRepository.findBySerialNo(serialNo);
     }
 
     /**
@@ -58,16 +57,14 @@ public class ReviewService {
      * @return review
      */
     public Review createReviewWithHawker(String reviewBody, Integer rating, String hawkerSerialno, String userName) {
-        User user = mongoTemplate.findOne(Query.query(Criteria.where("username").is(userName)), User.class);
-        Hawker hawker = mongoTemplate.findOne(Query.query(Criteria.where("serialno").is(hawkerSerialno)), Hawker.class);
-        Review review = reviewRepository.insert(new Review(reviewBody, rating, hawker, user));
+        Review review = reviewRepository.insert(new Review(reviewBody, rating, hawkerSerialno, "", userName));
         mongoTemplate.update(Hawker.class)
-                .matching(Query.query(Criteria.where("serialno").is(hawkerSerialno)))
-                .apply(Update.update("reviews", new Document("$push", new Document("reviews", review))))
+                .matching(Criteria.where("serialno").is(hawkerSerialno))
+                .apply(new Update().push("reviews").value(review))
                 .first();
         mongoTemplate.update(User.class)
-                .matching(Query.query(Criteria.where("username").is(userName)))
-                .apply(Update.update("reviews", new Document("$push", new Document("reviews", review))))
+                .matching(Criteria.where("username").is(userName))
+                .apply(new Update().push("reviews").value(review))
                 .first();
         return review;
     }
@@ -82,16 +79,14 @@ public class ReviewService {
      * @return review
      */
     public Review createReviewWithFoodStall(String reviewBody, Integer rating, String foodStallSerialno, String userName) {
-        User user = mongoTemplate.findOne(Query.query(Criteria.where("username").is(userName)), User.class);
-        FoodStall foodStall = mongoTemplate.findOne(Query.query(Criteria.where("serialno").is(foodStallSerialno)), FoodStall.class);
-        Review review = reviewRepository.insert(new Review(reviewBody, rating, foodStall, user));
+        Review review = reviewRepository.insert(new Review(reviewBody, rating, "", foodStallSerialno, userName));
         mongoTemplate.update(FoodStall.class)
                 .matching(Query.query(Criteria.where("serialno").is(foodStallSerialno)))
-                .apply(Update.update("reviews", new Document("$push", new Document("reviews", review))))
+                .apply(new Update().push("reviews", review))
                 .first();
         mongoTemplate.update(User.class)
                 .matching(Query.query(Criteria.where("username").is(userName)))
-                .apply(Update.update("reviews", new Document("$push", new Document("reviews", review))))
+                .apply(new Update().push("reviews", review))
                 .first();
         return review;
     }

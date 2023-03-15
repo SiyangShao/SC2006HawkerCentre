@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+import java.util.List;
 
 
 @Document(collection = "user")
@@ -39,4 +42,7 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    @DocumentReference
+    private List<Review> reviews;
 }

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,24 +24,33 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Review>> getReview(@PathVariable String id) {
-        return new ResponseEntity<>(reviewService.findById(id), HttpStatus.OK);
-    }
-
-    @GetMapping
-    public ResponseEntity<Iterable<Review>> getAllReviews() {
-        return new ResponseEntity<>(reviewService.findAll(), HttpStatus.OK);
-    }
-
-    @PostMapping
+    @PostMapping("/create/hawker")
     public ResponseEntity<Review> createReviewWithHawker(@RequestBody Map<String, String> body) {
         String reviewBody = body.get("reviewBody");
         Integer rating = Integer.parseInt(body.get("rating"));
         String hawkerSerialno = body.get("hawkerSerialno");
         String userName = body.get("userName");
-        System.out.println(reviewBody + "\n" + rating + "\n" + hawkerSerialno + "\n" + userName);
+//        System.out.println(reviewBody + "\n" + rating + "\n" + hawkerSerialno + "\n" + userName);
         return new ResponseEntity<>(reviewService.createReviewWithHawker(reviewBody, rating, hawkerSerialno, userName), HttpStatus.CREATED);
+    }
+
+    /**
+     * Get all reviews
+     */
+    @GetMapping("/all")
+    public ResponseEntity<List<Review>> getAllReviews() {
+        return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
+    }
+
+    /**
+     * Get review by serial number
+     *
+     * @param serialNo serial number
+     * @return review
+     */
+    @GetMapping("/serialno/{serialNo}")
+    public ResponseEntity<Optional<Review>> getReviewBySerialNo(@PathVariable String serialNo) {
+        return new ResponseEntity<>(reviewService.getReviewBySerialNo(serialNo), HttpStatus.OK);
     }
 
 }
