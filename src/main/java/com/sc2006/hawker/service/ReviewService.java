@@ -5,6 +5,7 @@ import com.sc2006.hawker.model.Hawker;
 import com.sc2006.hawker.model.Review;
 import com.sc2006.hawker.model.User;
 import com.sc2006.hawker.repository.ReviewRepository;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -50,23 +51,23 @@ public class ReviewService {
     /**
      * Create a review
      *
-     * @param reviewBody body of review
-     * @param rating     rating of review
-     * @param hawkerId   id of hawker
-     * @param userId     id of user
-     * @return review with hawker
+     * @param reviewBody     review body
+     * @param rating         rating
+     * @param hawkerSerialno serial number of hawker
+     * @param userName       name of user
+     * @return review
      */
-    public Review createReviewWithHawker(String reviewBody, Integer rating, ObjectId hawkerId, ObjectId userId) {
-        User user = mongoTemplate.findById(userId, User.class);
-        Hawker hawker = mongoTemplate.findById(hawkerId, Hawker.class);
+    public Review createReviewWithHawker(String reviewBody, Integer rating, String hawkerSerialno, String userName) {
+        User user = mongoTemplate.findOne(Query.query(Criteria.where("username").is(userName)), User.class);
+        Hawker hawker = mongoTemplate.findOne(Query.query(Criteria.where("serialno").is(hawkerSerialno)), Hawker.class);
         Review review = reviewRepository.insert(new Review(reviewBody, rating, hawker, user));
         mongoTemplate.update(Hawker.class)
-                .matching(Query.query(Criteria.where("id").is(hawkerId)))
-                .apply(Update.update("reviews", review))
+                .matching(Query.query(Criteria.where("serialno").is(hawkerSerialno)))
+                .apply(Update.update("reviews", new Document("$push", new Document("reviews", review))))
                 .first();
         mongoTemplate.update(User.class)
-                .matching(Query.query(Criteria.where("id").is(userId)))
-                .apply(Update.update("reviews", review))
+                .matching(Query.query(Criteria.where("username").is(userName)))
+                .apply(Update.update("reviews", new Document("$push", new Document("reviews", review))))
                 .first();
         return review;
     }
@@ -74,23 +75,23 @@ public class ReviewService {
     /**
      * Create a review
      *
-     * @param reviewBody  body of review
-     * @param rating      rating of review
-     * @param foodStallId id of food stall
-     * @param userId      id of user
-     * @return review with food stall
+     * @param reviewBody        review body
+     * @param rating            rating
+     * @param foodStallSerialno food stall serial number
+     * @param userName          name of user
+     * @return review
      */
-    public Review createReviewWithFoodStall(String reviewBody, Integer rating, ObjectId foodStallId, ObjectId userId) {
-        User user = mongoTemplate.findById(userId, User.class);
-        FoodStall foodStall = mongoTemplate.findById(foodStallId, FoodStall.class);
+    public Review createReviewWithFoodStall(String reviewBody, Integer rating, String foodStallSerialno, String userName) {
+        User user = mongoTemplate.findOne(Query.query(Criteria.where("username").is(userName)), User.class);
+        FoodStall foodStall = mongoTemplate.findOne(Query.query(Criteria.where("serialno").is(foodStallSerialno)), FoodStall.class);
         Review review = reviewRepository.insert(new Review(reviewBody, rating, foodStall, user));
         mongoTemplate.update(FoodStall.class)
-                .matching(Query.query(Criteria.where("id").is(foodStallId)))
-                .apply(Update.update("reviews", review))
+                .matching(Query.query(Criteria.where("serialno").is(foodStallSerialno)))
+                .apply(Update.update("reviews", new Document("$push", new Document("reviews", review))))
                 .first();
         mongoTemplate.update(User.class)
-                .matching(Query.query(Criteria.where("id").is(userId)))
-                .apply(Update.update("reviews", review))
+                .matching(Query.query(Criteria.where("username").is(userName)))
+                .apply(Update.update("reviews", new Document("$push", new Document("reviews", review))))
                 .first();
         return review;
     }

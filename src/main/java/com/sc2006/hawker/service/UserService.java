@@ -80,7 +80,7 @@ public class UserService {
         if (checkUser.isEmpty()) {
             return false;
         }
-        userRepository.deleteById(checkUser.get().getId());
+        userRepository.delete(checkUser.get());
         return true;
     }
 }

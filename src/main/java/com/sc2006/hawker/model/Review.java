@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 public class Review {
     @Id
     private ObjectId id;
+    private String serialNo;
     private String body;
     private Integer rating;
     /**
@@ -26,11 +27,16 @@ public class Review {
     @DocumentReference
     private FoodStall foodStall;
 
+    private void setSerialNo() {
+        this.serialNo = user.hashCode() + "" + hawker.hashCode();
+    }
+
     public Review(String body, Integer rating, Hawker hawker, User user) {
         this.body = body;
         this.rating = rating;
         this.hawker = hawker;
         this.user = user;
+        setSerialNo();
     }
 
     public Review(String body, Integer rating, FoodStall foodStall, User user) {
@@ -38,6 +44,7 @@ public class Review {
         this.rating = rating;
         this.foodStall = foodStall;
         this.user = user;
+        setSerialNo();
     }
 
     /**
