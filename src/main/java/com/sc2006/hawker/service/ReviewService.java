@@ -10,6 +10,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ReviewService {
     private final ReviewRepository reviewRepository;
@@ -53,9 +55,9 @@ public class ReviewService {
     /**
      * Delete review
      *
-     * @param serialno - serial number of hawker
-     * @param id       - id of review
-     * @return - deleted review
+     * @param serialno serial number of hawker
+     * @param id       id of review
+     * @return deleted review
      */
     public Review deleteReview(String serialno, ObjectId id) {
         Review review = reviewRepository.findById(id).get();
@@ -66,5 +68,24 @@ public class ReviewService {
                 .first();
 
         return review;
+    }
+
+    /**
+     * Find review by id
+     *
+     * @param id id of review
+     * @return review
+     */
+    public Optional<Review> findById(String id) {
+        return reviewRepository.findById(new ObjectId(id));
+    }
+
+    /**
+     * Find all reviews
+     *
+     * @return all reviews
+     */
+    public Iterable<Review> findAll() {
+        return reviewRepository.findAll();
     }
 }
