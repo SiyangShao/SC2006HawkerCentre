@@ -3,6 +3,7 @@ package com.sc2006.hawker.controller;
 import com.sc2006.hawker.service.FoodStallService;
 import com.sc2006.hawker.model.FoodStall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

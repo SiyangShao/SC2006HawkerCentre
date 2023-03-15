@@ -18,15 +18,28 @@ public class Review {
     private String body;
     private Integer rating;
     /**
-     * The food stall that the review is about.
-     */
-    @DocumentReference
-    private FoodStall foodStall;
-    /**
      * The hawker that the review is about.
      */
     @DocumentReference
     private Hawker hawker;
+
+    @DocumentReference
+    private FoodStall foodStall;
+
+    public Review(String body, Integer rating, Hawker hawker, User user) {
+        this.body = body;
+        this.rating = rating;
+        this.hawker = hawker;
+        this.user = user;
+    }
+
+    public Review(String body, Integer rating, FoodStall foodStall, User user) {
+        this.body = body;
+        this.rating = rating;
+        this.foodStall = foodStall;
+        this.user = user;
+    }
+
     /**
      * The user who wrote the review.
      */

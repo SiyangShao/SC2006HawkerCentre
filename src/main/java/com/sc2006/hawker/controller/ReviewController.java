@@ -22,18 +22,14 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/movie/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Review>> getReview(@PathVariable String id) {
-        return new ResponseEntity<Optional<Review>>(reviewService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(reviewService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/movie/reviews")
+    @GetMapping
     public ResponseEntity<Iterable<Review>> getAllReviews() {
-        return new ResponseEntity<Iterable<Review>>(reviewService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(reviewService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Map<String, String> payload) {
-        return new ResponseEntity<Review>(reviewService.createReview(payload.get("reviewBody"), payload.get("serialno")), HttpStatus.CREATED);
-    }
 }
