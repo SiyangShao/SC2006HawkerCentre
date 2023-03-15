@@ -43,7 +43,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<String> loginAccount(@RequestBody User user) {
         boolean exist = userService.loginUser(user);
-        if (exist == true)
+        if (exist)
             return new ResponseEntity<String>("Welcome back!", HttpStatus.OK);
         else
             return new ResponseEntity<String>("Login failed", HttpStatus.OK);
@@ -52,7 +52,7 @@ public class UserController {
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteAccount(@RequestBody User user) {
         boolean exist = userService.deleteUser(user);
-        if (exist == true)
+        if (exist)
             return new ResponseEntity<String>("User account deleted. Goodbye!", HttpStatus.OK);
         else
             return new ResponseEntity<String>("Delete failed", HttpStatus.OK);

@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 @Component
 public class UserService {
 
-    private static final Pattern EMAIL_PATTERN  = Pattern.compile("\\S+@\\S+\\.com$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("\\S+@\\S+\\.com$");
 
     public boolean isValidEmail(String email) {
         return EMAIL_PATTERN.matcher(email).matches();
@@ -30,35 +30,35 @@ public class UserService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public List<User> allUsers(){
+    public List<User> allUsers() {
         List<User> userDetails = userRepository.findAll();
         return userDetails;
     }
 
     public void addNewUser(User user) {
         Optional<User> userByUsername = userRepository.findUserByUsernameOrEmail(user.getUsername(), user.getEmail());
-        if(userByUsername.isPresent()){
+        if (userByUsername.isPresent()) {
             throw new IllegalStateException("username found");
         }
         boolean validEmail = isValidEmail(user.getEmail());
-        if(validEmail) {
+        if (validEmail) {
             userRepository.save(user);
             System.out.println("Valid email.");
-        }
-        else
+        } else
             System.out.println("Invalid email.");
     }
+
     @Transactional
     public void updateUser(User user) {
         Optional<User> checkUser = userRepository.findUserByUsername(user.getUsername());
-        if(checkUser.isEmpty()){
+        if (checkUser.isEmpty()) {
             throw new IllegalStateException("user does not exist.");
         }
 
         Optional<User> currentUser = userRepository.findUserByUsername(user.getUsername());
         System.out.println(currentUser);
 
-        if(user.getPassword()!=null && user.getPassword().length()>0)
+        if (user.getPassword() != null && user.getPassword().length() > 0)
             mongoTemplate.update(User.class)
                     .matching(Criteria.where("username").is(user.getUsername()))
                     .apply(new Update().set("password", user.getPassword()))
@@ -67,17 +67,17 @@ public class UserService {
             throw new IllegalStateException("new password requirements does not match");
     }
 
-    public boolean loginUser(User user){
+    public boolean loginUser(User user) {
         Optional<User> checkUser = userRepository.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
-        if(checkUser.isEmpty()){
+        if (checkUser.isEmpty()) {
             return false;
         }
         return true;
     }
 
-    public boolean deleteUser(User user){
+    public boolean deleteUser(User user) {
         Optional<User> checkUser = userRepository.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
-        if(checkUser.isEmpty()){
+        if (checkUser.isEmpty()) {
             return false;
         }
         userRepository.deleteById(checkUser.get().getId());

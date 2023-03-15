@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class HawkerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HawkerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HawkerApplication.class, args);
+    }
 
 }

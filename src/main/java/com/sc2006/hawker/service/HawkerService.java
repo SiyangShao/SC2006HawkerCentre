@@ -26,18 +26,19 @@ public class HawkerService {
     }
 
     //Search for all hawkers
-    public List<Hawker> allHawkers(){
+    public List<Hawker> allHawkers() {
         return hawkerrepository.findAll();
     }
 
     //Search for a single hawker based on serial number
-    public Optional<Hawker> singleHawker(String serialno){
+    public Optional<Hawker> singleHawker(String serialno) {
         return hawkerrepository.findHawkerBySerialno(serialno);
     }
 
     //Search Hawker by names
     public List<Hawker> hawkerByName(String name) {
-        return hawkerrepository.findHawkerByNameRegex(name); }
+        return hawkerrepository.findHawkerByNameRegex(name);
+    }
 
     //Search for Hawkers within 2.5km radius
     public List<Hawker> hawkerByPostalCode(String postalCode) throws JsonProcessingException {
@@ -50,11 +51,11 @@ public class HawkerService {
 
 //        Map<Hawker, Double> distanceMap = new HashMap<>();
 
-        for (Hawker hawker: hawkers){
+        for (Hawker hawker : hawkers) {
             double lat = Double.parseDouble(hawker.getLatitude_hc());
             double lon = Double.parseDouble(hawker.getLongitude_hc());
-            double distance = getDistance(centerlat,centerlon, lat, lon);
-            if (distance<=2.5){ //Change this to edit the radius of search
+            double distance = getDistance(centerlat, centerlon, lat, lon);
+            if (distance <= 2.5) { //Change this to edit the radius of search
                 nearestHawkers.add(hawker);
             }
 //            distanceMap.put(hawker, distance);
@@ -67,13 +68,15 @@ public class HawkerService {
 
         return nearestHawkers;
 
-    };
+    }
+
+    ;
 
     //Obtain latitude and longitude from postal code
     public double[] getLatLongFromPostalCode(String postalCode) throws JsonProcessingException {
         String url = "https://nominatim.openstreetmap.org/search?q=" + postalCode + "&format=json&addressdetails=1";
         RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject(url,String.class);
+        String response = restTemplate.getForObject(url, String.class);
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response);
         double[] latlon = new double[2];

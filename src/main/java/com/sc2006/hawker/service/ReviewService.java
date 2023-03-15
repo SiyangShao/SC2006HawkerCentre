@@ -21,7 +21,7 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public Review createReview(String reviewBody, String serialno){
+    public Review createReview(String reviewBody, String serialno) {
         Review review = reviewRepository.insert(new Review(reviewBody));
 
         mongoTemplate.update(Hawker.class)
@@ -34,8 +34,9 @@ public class ReviewService {
 
     /**
      * Update review
+     *
      * @param reviewBody - review body
-     * @param serialno - serial number of hawker
+     * @param serialno   - serial number of hawker
      * @return - updated review
      */
     public Review updateReview(String reviewBody, String serialno) {
@@ -51,8 +52,9 @@ public class ReviewService {
 
     /**
      * Delete review
+     *
      * @param serialno - serial number of hawker
-     * @param id - id of review
+     * @param id       - id of review
      * @return - deleted review
      */
     public Review deleteReview(String serialno, ObjectId id) {

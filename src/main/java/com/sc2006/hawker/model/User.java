@@ -19,21 +19,21 @@ public class User {
     private String id;
 
     @NotBlank
-    @Size(min=3, max=20)
+    @Size(min = 3, max = 20)
     private String username;
 
     @NotBlank
-    @Size(min=3, max=50)
+    @Size(min = 3, max = 50)
     private String email;
 
     @NotBlank
-    @Size(min=3, max=40)
+    @Size(min = 3, max = 40)
     private String password;
 
-    public User(){
+    public User() {
     }
 
-    public User(String username, String email, String password){
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;

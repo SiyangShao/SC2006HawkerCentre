@@ -13,17 +13,17 @@ public class FoodStallService {
     @Autowired
     private FoodStallRepository foodstallrepository;
 
-    public List<FoodStall> allFoodStalls(){
+    public List<FoodStall> allFoodStalls() {
         return foodstallrepository.findAll();
     }
 
     //Returns all food stalls in a specific hawker centre
-    public List<FoodStall> ListOfFoodStalls(String fsserialno){
+    public List<FoodStall> ListOfFoodStalls(String fsserialno) {
         return foodstallrepository.findFoodStallByFsserialno(fsserialno);
     }
 
     //Returns an individual food stall
-    public Optional<FoodStall> singleFoodStall(String fsserialno, String stallnumber){
+    public Optional<FoodStall> singleFoodStall(String fsserialno, String stallnumber) {
         return foodstallrepository.findFoodStallByFsserialnoAndStallnumber(fsserialno, stallnumber);
     }
 
