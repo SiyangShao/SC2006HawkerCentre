@@ -20,23 +20,23 @@ public class HawkerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Hawker>> getAllHawkers(){
-        return new ResponseEntity<List<Hawker>>(hawkerservice.allHawkers(), HttpStatus.OK);
+    public ResponseEntity<List<Hawker>> getAllHawkers() {
+        return new ResponseEntity<>(hawkerservice.allHawkers(), HttpStatus.OK);
     }
 
     @GetMapping("/{serialno}")
-    public ResponseEntity<Optional<Hawker>> getSingleHawker(@PathVariable String serialno){
-        return new ResponseEntity<Optional<Hawker>>(hawkerservice.singleHawker(serialno), HttpStatus.OK);
+    public ResponseEntity<Optional<Hawker>> getSingleHawker(@PathVariable String serialno) {
+        return new ResponseEntity<>(hawkerservice.singleHawker(serialno), HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Hawker>> getHawkerByName(@RequestParam(defaultValue = "") String name){
-        return new ResponseEntity<List<Hawker>>(hawkerservice.hawkerByName(name), HttpStatus.OK);
+    public ResponseEntity<List<Hawker>> getHawkerByName(@RequestParam(defaultValue = "") String name) {
+        return new ResponseEntity<>(hawkerservice.hawkerByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/search/nearest")
     public ResponseEntity<List<Hawker>> getNearestHawkersByPostalCode(@RequestParam String postalcode) throws JsonProcessingException {
-        return new ResponseEntity<List<Hawker>>(hawkerservice.hawkerByPostalCode(postalcode), HttpStatus.OK);
+        return new ResponseEntity<>(hawkerservice.hawkerByPostalCode(postalcode), HttpStatus.OK);
     }
 
     @GetMapping("/search/ophours")
@@ -45,23 +45,23 @@ public class HawkerController {
             @RequestParam(required = false) String postalcode,
             @RequestParam(required = false) String serialno) throws JsonProcessingException {
         List<Hawker> hawkers;
-        if(name!=null){
+        if (name != null) {
             hawkers = hawkerservice.hawkerByName(name);
-        } else if (postalcode != null){
+        } else if (postalcode != null) {
             hawkers = hawkerservice.hawkerByPostalCode(postalcode);
         } else if (serialno != null) {
             Optional<Hawker> hawker = hawkerservice.singleHawker(serialno);
-            if(hawker.isPresent()) {
+            if (hawker.isPresent()) {
                 hawkers = List.of(hawker.get());
             } else {
                 hawkers = List.of();
             }
-        } else{
+        } else {
             hawkers = hawkerservice.allHawkers();
         }
 
         List<Map<String, String>> result = new ArrayList<>();
-        for(Hawker hawker : hawkers) {
+        for (Hawker hawker : hawkers) {
             Map<String, String> hawkerMap = new LinkedHashMap<>();
             hawkerMap.put("name", hawker.getName());
             hawkerMap.put("q1_cleaningstartdate", hawker.getQ1_cleaningstartdate());
