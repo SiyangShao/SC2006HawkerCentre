@@ -21,38 +21,38 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<List<User>>(userService.allUsers(), HttpStatus.OK);
     }
 
     @PostMapping("/register/trial")
-    public ResponseEntity<User> registerNewUserTrail(@RequestBody User user){
+    public ResponseEntity<User> registerNewUserTrail(@RequestBody User user) {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public void createNewAccount(@RequestBody User user){
+    public void createNewAccount(@RequestBody User user) {
         userService.addNewUser(user);
     }
 
     @PostMapping("/update")
-    public void updateUserAccount(@RequestBody User user){
+    public void updateUserAccount(@RequestBody User user) {
         userService.updateUser(user);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginAccount(@RequestBody User user){
+    public ResponseEntity<String> loginAccount(@RequestBody User user) {
         boolean exist = userService.loginUser(user);
-        if (exist==true)
+        if (exist == true)
             return new ResponseEntity<String>("Welcome back!", HttpStatus.OK);
         else
             return new ResponseEntity<String>("Login failed", HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteAccount(@RequestBody User user){
+    public ResponseEntity<String> deleteAccount(@RequestBody User user) {
         boolean exist = userService.deleteUser(user);
-        if (exist==true)
+        if (exist == true)
             return new ResponseEntity<String>("User account deleted. Goodbye!", HttpStatus.OK);
         else
             return new ResponseEntity<String>("Delete failed", HttpStatus.OK);
