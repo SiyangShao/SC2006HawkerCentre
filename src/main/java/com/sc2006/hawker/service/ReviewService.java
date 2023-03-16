@@ -6,7 +6,6 @@ import com.sc2006.hawker.model.Review;
 import com.sc2006.hawker.model.User;
 import com.sc2006.hawker.repository.ReviewRepository;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -93,5 +92,39 @@ public class ReviewService {
 
     public List<Review> getReviewsByHawkerSerialNo(String hawkerSerialNo) {
         return mongoTemplate.find(Query.query(Criteria.where("hawkerSerialNo").is(hawkerSerialNo)), Review.class);
+    }
+
+    public List<Review> getReviewsByFoodStallSerialNo(String foodStallSerialNo) {
+        return mongoTemplate.find(Query.query(Criteria.where("foodStallSerialNo").is(foodStallSerialNo)), Review.class);
+    }
+
+    public List<Review> getReviewsByUserName(String userName) {
+        return mongoTemplate.find(Query.query(Criteria.where("userName").is(userName)), Review.class);
+    }
+
+    public Optional<Review> deleteReviewBySerialNo(String serialNo) {
+        Optional<Review> review = reviewRepository.findBySerialNo(serialNo);
+        if (review.isPresent()) {
+            System.err.println("Found! " + review.get().getFoodStallSerialNo());
+            reviewRepository.delete(review.get());
+            mongoTemplate.update(User.class)
+                    .matching(Query.query(Criteria.where("username").is(review.get().getUserName())))
+                    .apply(new Update().pull("reviews", new Document("serialNo", serialNo)))
+                    .first();
+            if (!review.get().getFoodStallSerialNo().isEmpty()) {
+                mongoTemplate.update(FoodStall.class)
+                        .matching(Query.query(Criteria.where("serialno").is(review.get().getFoodStallSerialNo())))
+                        .apply(new Update().pull("reviews", new Document("serialNo", serialNo)))
+                        .first();
+            }
+            if (!review.get().getHawkerSerialNo().isEmpty()) {
+                mongoTemplate.update(Hawker.class)
+                        .matching(Query.query(Criteria.where("serialno").is(review.get().getHawkerSerialNo())))
+                        .apply(new Update().pull("reviews", new Document("serialNo", serialNo)))
+                        .first();
+            }
+            return review;
+        }
+        return Optional.empty();
     }
 }

@@ -83,4 +83,37 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.getReviewsByHawkerSerialNo(hawkerSerialNo), HttpStatus.OK);
     }
 
+    /**
+     * Get reviews by food stall serial number
+     *
+     * @param foodStallSerialNo serial number of food stall
+     * @return reviews
+     */
+    @GetMapping("/foodstall/{foodStallSerialNo}")
+    public ResponseEntity<List<Review>> getReviewsByFoodStallSerialNo(@PathVariable String foodStallSerialNo) {
+        return new ResponseEntity<>(reviewService.getReviewsByFoodStallSerialNo(foodStallSerialNo), HttpStatus.OK);
+    }
+
+    /**
+     * Get reviews by user name
+     *
+     * @param userName user name
+     * @return reviews
+     */
+    @GetMapping("/user/{userName}")
+    public ResponseEntity<List<Review>> getReviewsByUserName(@PathVariable String userName) {
+        return new ResponseEntity<>(reviewService.getReviewsByUserName(userName), HttpStatus.OK);
+    }
+
+    /**
+     * Delete review by serial number
+     *
+     * @param serialNo serial number
+     * @return review
+     */
+    @DeleteMapping("/delete/{serialNo}")
+    public ResponseEntity<Optional<Review>> deleteReviewBySerialNo(@PathVariable String serialNo) {
+        return new ResponseEntity<>(reviewService.deleteReviewBySerialNo(serialNo), HttpStatus.OK);
+    }
+
 }
