@@ -111,4 +111,12 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.deleteReviewBySerialNo(serialNo), HttpStatus.OK);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Optional<Review>> updateReviewBySerialNo(@RequestBody Map<String, String> body) {
+        String serialNo = body.get("serialNo");
+        String reviewBody = body.get("reviewBody");
+        Integer rating = Integer.parseInt(body.get("rating"));
+        return new ResponseEntity<>(reviewService.updateReviewBySerialNo(serialNo, reviewBody, rating), HttpStatus.OK);
+    }
+
 }

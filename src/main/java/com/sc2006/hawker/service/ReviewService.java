@@ -127,4 +127,15 @@ public class ReviewService {
         }
         return Optional.empty();
     }
+
+    public Optional<Review> updateReviewBySerialNo(String serialNo, String reviewBody, Integer rating) {
+        Optional<Review> review = reviewRepository.findBySerialNo(serialNo);
+        if (review.isPresent()) {
+            review.get().setBody(reviewBody);
+            review.get().setRating(rating);
+            reviewRepository.save(review.get());
+            return review;
+        }
+        return Optional.empty();
+    }
 }
