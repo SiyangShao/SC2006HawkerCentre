@@ -3,7 +3,6 @@ package com.sc2006.hawker.controller;
 
 import com.sc2006.hawker.model.Review;
 import com.sc2006.hawker.service.ReviewService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -105,12 +104,22 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.getReviewsByUserName(userName), HttpStatus.OK);
     }
 
+    /**
+     * Delete review by serial number
+     * @param body serial number
+     * @return review
+     */
     @DeleteMapping("/delete")
     public ResponseEntity<Optional<Review>> deleteReviewBySerialNo(@RequestBody Map<String, String> body) {
         String serialNo = body.get("serialNo");
         return new ResponseEntity<>(reviewService.deleteReviewBySerialNo(serialNo), HttpStatus.OK);
     }
 
+    /**
+     * Update review by serial number
+     * @param body serial number, review body, rating
+     * @return review
+     */
     @PutMapping("/update")
     public ResponseEntity<Optional<Review>> updateReviewBySerialNo(@RequestBody Map<String, String> body) {
         String serialNo = body.get("serialNo");
@@ -119,11 +128,21 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.updateReviewBySerialNo(serialNo, reviewBody, rating), HttpStatus.OK);
     }
 
+    /**
+     * Get hawker rating
+     * @param hawkerSerialNo serial number of hawker
+     * @return rating
+     */
     @GetMapping("/hawker/{hawkerSerialNo}/rating")
     public ResponseEntity<Double> getHawkerRating(@PathVariable String hawkerSerialNo) {
         return new ResponseEntity<>(reviewService.getHawkerRating(hawkerSerialNo), HttpStatus.OK);
     }
 
+    /**
+     * Get food stall rating
+     * @param foodStallSerialNo serial number of food stall
+     * @return rating, if there is no review, return nan
+     */
     @GetMapping("/foodstall/{foodStallSerialNo}/rating")
     public ResponseEntity<Double> getFoodStallRating(@PathVariable String foodStallSerialNo) {
         return new ResponseEntity<>(reviewService.getFoodStallRating(foodStallSerialNo), HttpStatus.OK);

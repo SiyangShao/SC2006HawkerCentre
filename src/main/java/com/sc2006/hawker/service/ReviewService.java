@@ -90,18 +90,42 @@ public class ReviewService {
         return review;
     }
 
+    /**
+     * Get reviews by hawker serial number
+     *
+     * @param hawkerSerialNo hawker serial number
+     * @return list of reviews
+     */
     public List<Review> getReviewsByHawkerSerialNo(String hawkerSerialNo) {
         return mongoTemplate.find(Query.query(Criteria.where("hawkerSerialNo").is(hawkerSerialNo)), Review.class);
     }
 
+    /**
+     * Get reviews by food stall serial number
+     *
+     * @param foodStallSerialNo food stall serial number
+     * @return list of reviews
+     */
     public List<Review> getReviewsByFoodStallSerialNo(String foodStallSerialNo) {
         return mongoTemplate.find(Query.query(Criteria.where("foodStallSerialNo").is(foodStallSerialNo)), Review.class);
     }
 
+    /**
+     * Get reviews by user name
+     *
+     * @param userName user name
+     * @return list of reviews
+     */
     public List<Review> getReviewsByUserName(String userName) {
         return mongoTemplate.find(Query.query(Criteria.where("userName").is(userName)), Review.class);
     }
 
+    /**
+     * Delete review by serial number
+     *
+     * @param serialNo serial number
+     * @return review
+     */
     public Optional<Review> deleteReviewBySerialNo(String serialNo) {
         Optional<Review> review = reviewRepository.findBySerialNo(serialNo);
         if (review.isPresent()) {
@@ -128,6 +152,14 @@ public class ReviewService {
         return Optional.empty();
     }
 
+    /**
+     * Update review by serial number
+     *
+     * @param serialNo   serial number
+     * @param reviewBody review body
+     * @param rating     rating
+     * @return review
+     */
     public Optional<Review> updateReviewBySerialNo(String serialNo, String reviewBody, Integer rating) {
         Optional<Review> review = reviewRepository.findBySerialNo(serialNo);
         if (review.isPresent()) {
@@ -139,6 +171,12 @@ public class ReviewService {
         return Optional.empty();
     }
 
+    /**
+     * Get hawker rating
+     *
+     * @param hawkerSerialNo hawker serial number
+     * @return rating
+     */
     public double getHawkerRating(String hawkerSerialNo) {
         List<Review> reviews = getReviewsByHawkerSerialNo(hawkerSerialNo);
         double total = 0;
@@ -148,6 +186,12 @@ public class ReviewService {
         return total / reviews.size();
     }
 
+    /**
+     * Get food stall rating
+     *
+     * @param foodStallSerialNo food stall serial number
+     * @return rating
+     */
     public double getFoodStallRating(String foodStallSerialNo) {
         List<Review> reviews = getReviewsByFoodStallSerialNo(foodStallSerialNo);
         double total = 0;
