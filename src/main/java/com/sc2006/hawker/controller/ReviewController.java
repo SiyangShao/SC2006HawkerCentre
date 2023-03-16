@@ -24,6 +24,11 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
+    /**
+     * Create a review with hawker
+     * @param body review body
+     * @return review
+     */
     @PostMapping("/create/hawker")
     public ResponseEntity<Review> createReviewWithHawker(@RequestBody Map<String, String> body) {
         String reviewBody = body.get("reviewBody");
@@ -32,6 +37,20 @@ public class ReviewController {
         String userName = body.get("userName");
 //        System.out.println(reviewBody + "\n" + rating + "\n" + hawkerSerialno + "\n" + userName);
         return new ResponseEntity<>(reviewService.createReviewWithHawker(reviewBody, rating, hawkerSerialno, userName), HttpStatus.CREATED);
+    }
+
+    /**
+     * Create a review with food stall
+     * @param body review body
+     * @return review
+     */
+    @PostMapping("/create/foodstall")
+    public ResponseEntity<Review> createReviewWithFoodStall(@RequestBody Map<String, String> body) {
+        String reviewBody = body.get("reviewBody");
+        Integer rating = Integer.parseInt(body.get("rating"));
+        String foodStallSerialno = body.get("foodStallSerialno");
+        String userName = body.get("userName");
+        return new ResponseEntity<>(reviewService.createReviewWithFoodStall(reviewBody, rating, foodStallSerialno, userName), HttpStatus.CREATED);
     }
 
     /**
@@ -51,6 +70,17 @@ public class ReviewController {
     @GetMapping("/serialno/{serialNo}")
     public ResponseEntity<Optional<Review>> getReviewBySerialNo(@PathVariable String serialNo) {
         return new ResponseEntity<>(reviewService.getReviewBySerialNo(serialNo), HttpStatus.OK);
+    }
+
+    /**
+     * Get reviews by hawker serial number
+     *
+     * @param hawkerSerialNo serial number of hawker
+     * @return reviews
+     */
+    @GetMapping("/hawker/{hawkerSerialNo}")
+    public ResponseEntity<List<Review>> getReviewsByHawkerSerialNo(@PathVariable String hawkerSerialNo) {
+        return new ResponseEntity<>(reviewService.getReviewsByHawkerSerialNo(hawkerSerialNo), HttpStatus.OK);
     }
 
 }

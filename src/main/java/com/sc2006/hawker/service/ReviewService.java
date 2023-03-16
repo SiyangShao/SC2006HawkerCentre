@@ -90,4 +90,8 @@ public class ReviewService {
                 .first();
         return review;
     }
+
+    public List<Review> getReviewsByHawkerSerialNo(String hawkerSerialNo) {
+        return mongoTemplate.find(Query.query(Criteria.where("hawkerSerialNo").is(hawkerSerialNo)), Review.class);
+    }
 }
