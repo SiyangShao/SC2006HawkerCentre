@@ -105,14 +105,9 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.getReviewsByUserName(userName), HttpStatus.OK);
     }
 
-    /**
-     * Delete review by serial number
-     *
-     * @param serialNo serial number
-     * @return review
-     */
-    @DeleteMapping("/delete/{serialNo}")
-    public ResponseEntity<Optional<Review>> deleteReviewBySerialNo(@PathVariable String serialNo) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<Optional<Review>> deleteReviewBySerialNo(@RequestBody Map<String, String> body) {
+        String serialNo = body.get("serialNo");
         return new ResponseEntity<>(reviewService.deleteReviewBySerialNo(serialNo), HttpStatus.OK);
     }
 
