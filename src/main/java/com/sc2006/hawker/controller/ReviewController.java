@@ -119,4 +119,14 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.updateReviewBySerialNo(serialNo, reviewBody, rating), HttpStatus.OK);
     }
 
+    @GetMapping("/hawker/{hawkerSerialNo}/rating")
+    public ResponseEntity<Double> getHawkerRating(@PathVariable String hawkerSerialNo) {
+        return new ResponseEntity<>(reviewService.getHawkerRating(hawkerSerialNo), HttpStatus.OK);
+    }
+
+    @GetMapping("/foodstall/{foodStallSerialNo}/rating")
+    public ResponseEntity<Double> getFoodStallRating(@PathVariable String foodStallSerialNo) {
+        return new ResponseEntity<>(reviewService.getFoodStallRating(foodStallSerialNo), HttpStatus.OK);
+    }
+
 }

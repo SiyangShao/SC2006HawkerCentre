@@ -138,4 +138,22 @@ public class ReviewService {
         }
         return Optional.empty();
     }
+
+    public double getHawkerRating(String hawkerSerialNo) {
+        List<Review> reviews = getReviewsByHawkerSerialNo(hawkerSerialNo);
+        double total = 0;
+        for (Review review : reviews) {
+            total += review.getRating();
+        }
+        return total / reviews.size();
+    }
+
+    public double getFoodStallRating(String foodStallSerialNo) {
+        List<Review> reviews = getReviewsByFoodStallSerialNo(foodStallSerialNo);
+        double total = 0;
+        for (Review review : reviews) {
+            total += review.getRating();
+        }
+        return total / reviews.size();
+    }
 }
