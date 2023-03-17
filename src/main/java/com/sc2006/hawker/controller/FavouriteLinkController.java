@@ -15,6 +15,11 @@ public class FavouriteLinkController {
     @Autowired
     private FavouriteLinkService favouritelinkservice;
 
+    @GetMapping("/all")
+    public List<FavouriteLink> getAllFavouriteLinks() {
+        return favouritelinkservice.getAllFavouriteLinks();
+    }
+
     @GetMapping("/user/{username}/count")
     public int getNumberOfFavouriteForUser(@PathVariable String username) {
         return favouritelinkservice.getNumberOfFavouriteForUser(username);
@@ -64,22 +69,42 @@ public class FavouriteLinkController {
     }
 
     @GetMapping("/user/{username}/hawker/count")
-    public int getNumberOfFavouriteForHawker(@PathVariable String username) {
-        return favouritelinkservice.getNumberOfFavouriteForHawker(username);
+    public int getNumberOfFavouriteForHawkerInSingleUser(@PathVariable String username) {
+        return favouritelinkservice.getNumberOfFavouriteForHawkerInSingleUser(username);
     }
 
     @GetMapping("/user/{username}/foodstall/count")
     public int getNumberOfFavouriteForFoodStall(@PathVariable String username, @PathVariable String serialno) {
-        return favouritelinkservice.getNumberOfFavouriteForFoodStall(username);
+        return favouritelinkservice.getNumberOfFavouriteForFoodStallInSingleUser(username);
     }
 
     @GetMapping("/user/{username}/hawker/list")
-    public List<FavouriteLink> getListOfFavouriteForHawker(@PathVariable String username) {
-        return favouritelinkservice.getListOfFavouriteForHawker(username);
+    public List<FavouriteLink> getListOfFavouriteForHawkerInSingleUser(@PathVariable String username) {
+        return favouritelinkservice.getListOfFavouriteForHawkerInSingleUser(username);
     }
 
     @GetMapping("/user/{username}/foodstall/list")
-    public List<FavouriteLink> getListOfFavouriteForFoodStall(@PathVariable String username) {
-        return favouritelinkservice.getListOfFavouriteForFoodStall(username);
+    public List<FavouriteLink> getListOfFavouriteForFoodStallInSingleUser(@PathVariable String username) {
+        return favouritelinkservice.getListOfFavouriteForFoodStallInSingleUser(username);
+    }
+
+    @GetMapping("hawker/{serialno}/count")
+    public int getNumberOfFavouriteForHawker(@PathVariable String serialno) {
+        return favouritelinkservice.getNumberOfFavouriteForHawker(serialno);
+    }
+
+    @GetMapping("foodstall/{serialno}/count")
+    public int getNumberOfFavouriteForFoodStall(@PathVariable String serialno) {
+        return favouritelinkservice.getNumberOfFavouriteForFoodStall(serialno);
+    }
+
+    @GetMapping("hawker/{serialno}/list")
+    public List<FavouriteLink> getListOfFavouriteForHawker(@PathVariable String serialno) {
+        return favouritelinkservice.getListOfFavouriteForHawker(serialno);
+    }
+
+    @GetMapping("foodstall/{serialno}/list")
+    public List<FavouriteLink> getListOfFavouriteForFoodStall(@PathVariable String serialno) {
+        return favouritelinkservice.getListOfFavouriteForFoodStall(serialno);
     }
 }

@@ -49,6 +49,9 @@ public class FavouriteLinkService {
     }
 
     public FavouriteLink deleteFavouriteLinkToHawker(String username, String serialno) {
+        System.err.println("deleteFavouriteLinkToHawker");
+        System.err.println("username = " + username);
+        System.err.println("serialno = " + serialno);
         List<FavouriteLink> favouritelink = favouritelinkrepository.findFavouriteLinkByUsernameAndHawkerserialno(username, serialno);
         if (favouritelink.size() == 0) {
             throw new IllegalStateException("Favourite link does not exist");
@@ -80,7 +83,7 @@ public class FavouriteLinkService {
         return favouritelink.size() != 0;
     }
 
-    public int getNumberOfFavouriteForHawker(String username) {
+    public int getNumberOfFavouriteForHawkerInSingleUser(String username) {
         List<FavouriteLink> favouritelink = favouritelinkrepository.findFavouriteLinkByUsername(username);
         int count = 0;
         for (FavouriteLink favouriteLink : favouritelink) {
@@ -91,7 +94,7 @@ public class FavouriteLinkService {
         return count;
     }
 
-    public int getNumberOfFavouriteForFoodStall(String username) {
+    public int getNumberOfFavouriteForFoodStallInSingleUser(String username) {
         List<FavouriteLink> favouritelink = favouritelinkrepository.findFavouriteLinkByUsername(username);
         int count = 0;
         for (FavouriteLink favouriteLink : favouritelink) {
@@ -102,7 +105,7 @@ public class FavouriteLinkService {
         return count;
     }
 
-    public List<FavouriteLink> getListOfFavouriteForHawker(String username) {
+    public List<FavouriteLink> getListOfFavouriteForHawkerInSingleUser(String username) {
         List<FavouriteLink> favouritelink = favouritelinkrepository.findFavouriteLinkByUsername(username);
         List<FavouriteLink> favouritelinkForHawker = new ArrayList<>();
         for (FavouriteLink favouriteLink : favouritelink) {
@@ -113,7 +116,7 @@ public class FavouriteLinkService {
         return favouritelinkForHawker;
     }
 
-    public List<FavouriteLink> getListOfFavouriteForFoodStall(String username) {
+    public List<FavouriteLink> getListOfFavouriteForFoodStallInSingleUser(String username) {
         List<FavouriteLink> favouritelink = favouritelinkrepository.findFavouriteLinkByUsername(username);
         List<FavouriteLink> favouritelinkForFoodStall = new ArrayList<>();
         for (FavouriteLink favouriteLink : favouritelink) {
@@ -122,5 +125,25 @@ public class FavouriteLinkService {
             }
         }
         return favouritelinkForFoodStall;
+    }
+
+    public List<FavouriteLink> getAllFavouriteLinks() {
+        return favouritelinkrepository.findAll();
+    }
+
+    public int getNumberOfFavouriteForHawker(String serialno) {
+        return favouritelinkrepository.countFavouriteLinkByHawkerserialno(serialno);
+    }
+
+    public int getNumberOfFavouriteForFoodStall(String serialno) {
+        return favouritelinkrepository.countFavouriteLinkByFoodstallserialno(serialno);
+    }
+
+    public List<FavouriteLink> getListOfFavouriteForHawker(String serialno) {
+        return favouritelinkrepository.findFavouriteLinkByHawkerserialno(serialno);
+    }
+
+    public List<FavouriteLink> getListOfFavouriteForFoodStall(String serialno) {
+        return favouritelinkrepository.findFavouriteLinkByFoodstallserialno(serialno);
     }
 }
