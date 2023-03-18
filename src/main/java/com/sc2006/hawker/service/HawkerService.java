@@ -4,6 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 
 import com.sc2006.hawker.model.Hawker;
@@ -15,6 +19,7 @@ import java.util.*;
 //import org.json.JSONArray;
 //import org.json.JSONObject;
 
+@CrossOrigin(origins="http://localhost:3000")
 @Service
 public class HawkerService {
 
@@ -29,15 +34,25 @@ public class HawkerService {
     public List<Hawker> allHawkers(){
         return hawkerrepository.findAll();
     }
+    public Page<Hawker> getAllHawkers(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return hawkerrepository.findAll(pageable);
+    }
 
+
+    public Page<Hawker> getAllHawkers(String name, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return hawkerrepository.findAll(name, pageable);
+    }
     //Search for a single hawker based on serial number
     public Optional<Hawker> singleHawker(String serialno){
         return hawkerrepository.findHawkerBySerialno(serialno);
     }
 
     //Search Hawker by names
-    public List<Hawker> hawkerByName(String name) {
-        return hawkerrepository.findHawkerByNameRegex(name); }
+    public Page<Hawker> hawkerByName(String name, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return hawkerrepository.findHawkerByNameRegex(name, pageable); }
 
     //Search for Hawkers within 2.5km radius
     public List<Hawker> hawkerByPostalCode(String postalCode) throws JsonProcessingException {

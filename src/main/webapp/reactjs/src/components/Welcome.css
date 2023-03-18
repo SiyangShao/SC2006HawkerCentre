@@ -1,0 +1,12 @@
+.my-footer {
+    background-color: #f0e6e4; /* replace with your desired color */
+}
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: 100%;
+}
