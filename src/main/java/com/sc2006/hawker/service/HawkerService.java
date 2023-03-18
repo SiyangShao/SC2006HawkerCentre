@@ -4,6 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 
 import com.sc2006.hawker.model.Hawker;
@@ -15,6 +19,7 @@ import java.util.*;
 //import org.json.JSONArray;
 //import org.json.JSONObject;
 
+@CrossOrigin(origins="http://localhost:3000")
 @Service
 public class HawkerService {
 
@@ -26,19 +31,28 @@ public class HawkerService {
     }
 
     //Search for all hawkers
-    public List<Hawker> allHawkers() {
+    public List<Hawker> allHawkers(){
         return hawkerrepository.findAll();
     }
+    public Page<Hawker> getAllHawkers(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return hawkerrepository.findAll(pageable);
+    }
 
+
+    public Page<Hawker> getAllHawkers(String name, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return hawkerrepository.findAll(name, pageable);
+    }
     //Search for a single hawker based on serial number
-    public Optional<Hawker> singleHawker(String serialno) {
+    public Optional<Hawker> singleHawker(String serialno){
         return hawkerrepository.findHawkerBySerialno(serialno);
     }
 
     //Search Hawker by names
-    public List<Hawker> hawkerByName(String name) {
-        return hawkerrepository.findHawkerByNameRegex(name);
-    }
+    public Page<Hawker> hawkerByName(String name, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return hawkerrepository.findHawkerByNameRegex(name, pageable); }
 
     //Search for Hawkers within 2.5km radius
     public List<Hawker> hawkerByPostalCode(String postalCode) throws JsonProcessingException {
@@ -51,11 +65,11 @@ public class HawkerService {
 
 //        Map<Hawker, Double> distanceMap = new HashMap<>();
 
-        for (Hawker hawker : hawkers) {
+        for (Hawker hawker: hawkers){
             double lat = Double.parseDouble(hawker.getLatitude_hc());
             double lon = Double.parseDouble(hawker.getLongitude_hc());
-            double distance = getDistance(centerlat, centerlon, lat, lon);
-            if (distance <= 2.5) { //Change this to edit the radius of search
+            double distance = getDistance(centerlat,centerlon, lat, lon);
+            if (distance<=2.5){ //Change this to edit the radius of search
                 nearestHawkers.add(hawker);
             }
 //            distanceMap.put(hawker, distance);
@@ -68,15 +82,13 @@ public class HawkerService {
 
         return nearestHawkers;
 
-    }
-
-    ;
+    };
 
     //Obtain latitude and longitude from postal code
     public double[] getLatLongFromPostalCode(String postalCode) throws JsonProcessingException {
         String url = "https://nominatim.openstreetmap.org/search?q=" + postalCode + "&format=json&addressdetails=1";
         RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject(url, String.class);
+        String response = restTemplate.getForObject(url,String.class);
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response);
         double[] latlon = new double[2];
