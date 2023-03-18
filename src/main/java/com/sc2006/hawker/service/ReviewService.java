@@ -35,7 +35,12 @@ public class ReviewService {
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
     }
-
+    /**
+     * Get Serial No
+     */
+    public String getSerialNo(String userName, String hawkerSerialNo, String foodStallSerialNo){
+        return userName + "@@@" + hawkerSerialNo + "###" + foodStallSerialNo;
+    }
     /**
      * Get review by serial number
      *
@@ -73,12 +78,16 @@ public class ReviewService {
      *
      * @param reviewBody        review body
      * @param rating            rating
+     * @param hawkerSerialNo    serial number of hawker
      * @param foodStallSerialno food stall serial number
      * @param userName          name of user
      * @return review
      */
-    public Review createReviewWithFoodStall(String reviewBody, Integer rating, String foodStallSerialno, String userName) {
-        Review review = reviewRepository.insert(new Review(reviewBody, rating, "", foodStallSerialno, userName));
+    public Review createReviewWithFoodStall(String reviewBody, Integer rating, String hawkerSerialNo, String foodStallSerialno, String userName) {
+        if (!hawkerSerialNo.equals( Query.query(Criteria.where("serialno").is(foodStallSerialno)).toString())) {
+            throw new IllegalArgumentException("Hawker serial number does not match food stall serial number");
+        }
+        Review review = reviewRepository.insert(new Review(reviewBody, rating, hawkerSerialNo, foodStallSerialno, userName));
         mongoTemplate.update(FoodStall.class)
                 .matching(Query.query(Criteria.where("serialno").is(foodStallSerialno)))
                 .apply(new Update().push("reviews", review))

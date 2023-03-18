@@ -23,11 +23,13 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    /**
-     * Create a review with hawker
-     * @param body review body
+    /*
+      Create a review with hawker
+
+      @param body review body
      * @return review
-     */
+
+     commented as review cannot be created without food stall
     @PostMapping("/create/hawker")
     public ResponseEntity<Review> createReviewWithHawker(@RequestBody Map<String, String> body) {
         String reviewBody = body.get("reviewBody");
@@ -37,9 +39,11 @@ public class ReviewController {
 //        System.out.println(reviewBody + "\n" + rating + "\n" + hawkerSerialno + "\n" + userName);
         return new ResponseEntity<>(reviewService.createReviewWithHawker(reviewBody, rating, hawkerSerialno, userName), HttpStatus.CREATED);
     }
+     */
 
     /**
      * Create a review with food stall
+     *
      * @param body review body
      * @return review
      */
@@ -47,9 +51,10 @@ public class ReviewController {
     public ResponseEntity<Review> createReviewWithFoodStall(@RequestBody Map<String, String> body) {
         String reviewBody = body.get("reviewBody");
         Integer rating = Integer.parseInt(body.get("rating"));
+        String hawkerSerialno = body.get("hawkerSerialno");
         String foodStallSerialno = body.get("foodStallSerialno");
         String userName = body.get("userName");
-        return new ResponseEntity<>(reviewService.createReviewWithFoodStall(reviewBody, rating, foodStallSerialno, userName), HttpStatus.CREATED);
+        return new ResponseEntity<>(reviewService.createReviewWithFoodStall(reviewBody, rating, hawkerSerialno, foodStallSerialno, userName), HttpStatus.CREATED);
     }
 
     /**
@@ -60,6 +65,7 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
     }
 
+
     /**
      * Get review by serial number
      *
@@ -69,6 +75,17 @@ public class ReviewController {
     @GetMapping("/serialno/{serialNo}")
     public ResponseEntity<Optional<Review>> getReviewBySerialNo(@PathVariable String serialNo) {
         return new ResponseEntity<>(reviewService.getReviewBySerialNo(serialNo), HttpStatus.OK);
+    }
+
+    /**
+     * Get review by all others
+     */
+    @GetMapping("/user/{userName}")
+    public ResponseEntity<Optional<Review>> getReviewByUserName(@PathVariable String userName, @RequestBody Map<String, String> body) {
+        String hawkerSerialno = body.get("hawkerSerialno");
+        String foodStallSerialno = body.get("foodStallSerialno");
+        String serialNo = reviewService.getSerialNo(userName, hawkerSerialno, foodStallSerialno);
+        return getReviewBySerialNo(serialNo);
     }
 
     /**
@@ -94,9 +111,9 @@ public class ReviewController {
     }
 
     /**
-     * Get reviews by user name
+     * Get reviews by username
      *
-     * @param userName user name
+     * @param userName username
      * @return reviews
      */
     @GetMapping("/user/{userName}")
@@ -106,6 +123,7 @@ public class ReviewController {
 
     /**
      * Delete review by serial number
+     *
      * @param body serial number
      * @return review
      */
@@ -117,6 +135,7 @@ public class ReviewController {
 
     /**
      * Update review by serial number
+     *
      * @param body serial number, review body, rating
      * @return review
      */
@@ -130,6 +149,7 @@ public class ReviewController {
 
     /**
      * Get hawker rating
+     *
      * @param hawkerSerialNo serial number of hawker
      * @return rating
      */
@@ -140,6 +160,7 @@ public class ReviewController {
 
     /**
      * Get food stall rating
+     *
      * @param foodStallSerialNo serial number of food stall
      * @return rating, if there is no review, return nan
      */

@@ -28,25 +28,28 @@ public class FavouriteLinkService {
         return favouritelinkrepository.findFavouriteLinkByUsername(username);
     }
 
-    public FavouriteLink addFavouriteLinkToHawker(String username, String serialno) {
-        List<FavouriteLink> favouritelink = favouritelinkrepository.findFavouriteLinkByUsernameAndHawkerserialno(username, serialno);
-        if (favouritelink.size() == 0) {
-            FavouriteLink newFavouriteLink = new FavouriteLink(username, serialno, null);
+    public FavouriteLink addFavouriteLinkToHawker(String username, String hawkerSerialno, String foodStallSerialno) {
+        List<FavouriteLink> favouritelink = favouritelinkrepository.findUniqueFavouriteLink(username, hawkerSerialno, foodStallSerialno);
+        if (favouritelink.isEmpty()) {
+            FavouriteLink newFavouriteLink = new FavouriteLink(username, hawkerSerialno, foodStallSerialno);
             return favouritelinkrepository.insert(newFavouriteLink);
         } else {
             throw new IllegalStateException("Favourite link already exists");
         }
     }
 
+    /*
     public FavouriteLink addFavouriteLinkToFoodStall(String username, String serialno) {
         List<FavouriteLink> favouritelink = favouritelinkrepository.findFavouriteLinkByUsernameAndFoodstallserialno(username, serialno);
-        if (favouritelink.size() == 0) {
+        if (favouritelink.isEmpty()) {
             FavouriteLink newFavouriteLink = new FavouriteLink(username, null, serialno);
             return favouritelinkrepository.insert(newFavouriteLink);
         } else {
             throw new IllegalStateException("Favourite link already exists");
         }
     }
+
+     */
 
     public FavouriteLink deleteFavouriteLinkToHawker(String username, String serialno) {
         System.err.println("deleteFavouriteLinkToHawker");

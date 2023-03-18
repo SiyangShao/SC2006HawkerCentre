@@ -30,20 +30,28 @@ public class FavouriteLinkController {
         return favouritelinkservice.getListOfFavouriteForUser(username);
     }
 
-    @PostMapping("/add/hawker")
-    public FavouriteLink addFavouriteLinkToHawker(@RequestBody Map<String, String> body) {
+    @PostMapping("/add/favouriteLink")
+    public FavouriteLink addFavouriteLink(@RequestBody Map<String, String> body) {
         String username = body.get("username");
-        String serialno = body.get("serialno");
-        return favouritelinkservice.addFavouriteLinkToHawker(username, serialno);
+        String hawkerSerialno = body.get("hawkerSerialno");
+        String foodStallSerialno = body.get("foodStallSerialno");
+        return favouritelinkservice.addFavouriteLinkToHawker(username, hawkerSerialno, foodStallSerialno);
     }
 
-    @PostMapping("/add/foodstall")
-    public FavouriteLink addFavouriteLinkToFoodStall(@RequestBody Map<String, String> body) {
-        String username = body.get("username");
-        String serialno = body.get("serialno");
-        return favouritelinkservice.addFavouriteLinkToFoodStall(username, serialno);
-    }
-
+    /*
+        @PostMapping("/add/hawker")
+        public FavouriteLink addFavouriteLinkToHawker(@RequestBody Map<String, String> body) {
+            String username = body.get("username");
+            String serialno = body.get("serialno");
+            return favouritelinkservice.addFavouriteLinkToHawker(username, serialno);
+        }
+        @PostMapping("/add/foodstall")
+        public FavouriteLink addFavouriteLinkToFoodStall(@RequestBody Map<String, String> body) {
+            String username = body.get("username");
+            String serialno = body.get("serialno");
+            return favouritelinkservice.addFavouriteLinkToFoodStall(username, serialno);
+        }
+    */
     @DeleteMapping("/delete/hawker")
     public FavouriteLink deleteFavouriteLinkToHawker(@RequestBody Map<String, String> body) {
         String username = body.get("username");
@@ -74,7 +82,7 @@ public class FavouriteLinkController {
     }
 
     @GetMapping("/user/{username}/foodstall/count")
-    public int getNumberOfFavouriteForFoodStall(@PathVariable String username, @PathVariable String serialno) {
+    public int getNumberOfFavouriteForFoodStall(@PathVariable String username) {
         return favouritelinkservice.getNumberOfFavouriteForFoodStallInSingleUser(username);
     }
 
@@ -89,12 +97,12 @@ public class FavouriteLinkController {
     }
 
     @GetMapping("hawker/{serialno}/count")
-    public int getNumberOfFavouriteForHawker(@PathVariable String serialno) {
+    public int getNumberOfFavouriteForHawkerByHawkerSerialNo(@PathVariable String serialno) {
         return favouritelinkservice.getNumberOfFavouriteForHawker(serialno);
     }
 
     @GetMapping("foodstall/{serialno}/count")
-    public int getNumberOfFavouriteForFoodStall(@PathVariable String serialno) {
+    public int getNumberOfFavouriteForFoodStallByFoodStoreSerialNo(@PathVariable String serialno) {
         return favouritelinkservice.getNumberOfFavouriteForFoodStall(serialno);
     }
 

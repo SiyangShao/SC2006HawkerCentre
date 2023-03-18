@@ -10,8 +10,12 @@ import java.util.List;
 @Repository
 public interface FavouriteLinkRepository extends MongoRepository<FavouriteLink, ObjectId> {
     List<FavouriteLink> findFavouriteLinkByUsername(String username);
+
     List<FavouriteLink> findFavouriteLinkByUsernameAndHawkerserialno(String username, String hawkerserialno);
+
     List<FavouriteLink> findFavouriteLinkByUsernameAndFoodstallserialno(String username, String foodstallserialno);
+
+    List<FavouriteLink> findUniqueFavouriteLink(String username, String hawkerserialno, String foodstallserialno);
 
     int countFavouriteLinkByUsername(String username);
 
