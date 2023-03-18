@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.List;
 
 
 @Document(collection = "foodstalls")
@@ -31,6 +34,9 @@ public class FoodStall {
     private String description;
     private String openingHours;
     private String status;
+
+    @DocumentReference
+    private List<Review> reviews;
 
 
 }
