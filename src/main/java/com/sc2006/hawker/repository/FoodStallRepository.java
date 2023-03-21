@@ -15,4 +15,6 @@ public interface FoodStallRepository extends MongoRepository<FoodStall, ObjectId
 
     // Returns individual food stall
     Optional<FoodStall> findFoodStallByFsserialnoAndStallnumber(String fsserialno, String stallnumber);
+
+    Optional<FoodStall> findByFsserialno(String fsserialno);
 }

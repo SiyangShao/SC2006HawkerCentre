@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin
@@ -34,5 +35,21 @@ public class FoodStallController {
     @GetMapping("/{fs_serial_no}/{stall_number}")
     public ResponseEntity<Optional<FoodStall>> getSingleFoodStall(@PathVariable String fs_serial_no, @PathVariable String stall_number){
         return new ResponseEntity<Optional<FoodStall>>(foodstallservice.singleFoodStall(fs_serial_no, stall_number), HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public FoodStall addNewFoodStall(@RequestBody FoodStall foodstall) {
+        System.err.println(foodstall.getName());
+        return foodstallservice.addNewFoodStall(foodstall);
+    }
+
+    @PutMapping("/update")
+    public void updateFoodStall(@RequestBody Map<String, String> item) {
+        foodstallservice.updateFoodStall(item);
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteFoodStall(@RequestBody Map<String, String> item) {
+        foodstallservice.deleteFoodStall(item.get("fs_serial_no"));
     }
 }

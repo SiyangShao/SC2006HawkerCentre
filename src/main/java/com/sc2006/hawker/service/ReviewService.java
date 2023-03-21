@@ -87,9 +87,9 @@ public class ReviewService {
      * @return review
      */
     public Review createReviewWithFoodStall(String reviewBody, Integer rating, String hawkerSerialNo, String foodStallSerialno, String userName) {
-        if (!hawkerSerialNo.equals(Query.query(Criteria.where("serialno").is(foodStallSerialno)).toString())) {
-            throw new IllegalArgumentException("Hawker serial number does not match food stall serial number");
-        }
+//        if (!hawkerSerialNo.equals(Query.query(Criteria.where("serialno").is(foodStallSerialno)).toString())) {
+//            throw new IllegalArgumentException("Hawker serial number does not match food stall serial number");
+//        }
         Review review = reviewRepository.insert(new Review(reviewBody, rating, hawkerSerialNo, foodStallSerialno, userName));
         mongoTemplate.update(FoodStall.class)
                 .matching(Query.query(Criteria.where("serialno").is(foodStallSerialno)))
