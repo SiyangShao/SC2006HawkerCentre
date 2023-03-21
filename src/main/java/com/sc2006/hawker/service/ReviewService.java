@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,12 +36,14 @@ public class ReviewService {
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
     }
+
     /**
      * Get Serial No
      */
-    public String getSerialNo(String userName, String hawkerSerialNo, String foodStallSerialNo){
+    public String getSerialNo(String userName, String hawkerSerialNo, String foodStallSerialNo) {
         return userName + "@@@" + hawkerSerialNo + "###" + foodStallSerialNo;
     }
+
     /**
      * Get review by serial number
      *
@@ -84,7 +87,7 @@ public class ReviewService {
      * @return review
      */
     public Review createReviewWithFoodStall(String reviewBody, Integer rating, String hawkerSerialNo, String foodStallSerialno, String userName) {
-        if (!hawkerSerialNo.equals( Query.query(Criteria.where("serialno").is(foodStallSerialno)).toString())) {
+        if (!hawkerSerialNo.equals(Query.query(Criteria.where("serialno").is(foodStallSerialno)).toString())) {
             throw new IllegalArgumentException("Hawker serial number does not match food stall serial number");
         }
         Review review = reviewRepository.insert(new Review(reviewBody, rating, hawkerSerialNo, foodStallSerialno, userName));
@@ -159,6 +162,36 @@ public class ReviewService {
             return review;
         }
         return Optional.empty();
+    }
+
+    /**
+     * Delete all reviews by food stall serial number
+     *
+     * @param foodstoreSerialNo food stall serial number
+     * @return deletedReviews deleted reviews
+     */
+    public List<Optional<Review>> deleteAllReviewByFoodStallSerialNo(String foodstoreSerialNo) {
+        List<Review> reviews = reviewRepository.findReviewByFoodStallSerialNo(foodstoreSerialNo);
+        List<Optional<Review>> deletedReviews = new ArrayList<>();
+        for (Review review : reviews) {
+            deletedReviews.add(deleteReviewBySerialNo(review.getSerialNo()));
+        }
+        return deletedReviews;
+    }
+
+    /**
+     * Delete all reviews by hawker serial number
+     *
+     * @param hawkerSerialNo hawker serial number
+     * @return deletedReviews deleted reviews
+     */
+    public List<Optional<Review>> deleteAllReviewByHawkerSerialNo(String hawkerSerialNo) {
+        List<Review> reviews = reviewRepository.findReviewByHawkerSerialNo(hawkerSerialNo);
+        List<Optional<Review>> deletedReviews = new ArrayList<>();
+        for (Review review : reviews) {
+            deletedReviews.add(deleteReviewBySerialNo(review.getSerialNo()));
+        }
+        return deletedReviews;
     }
 
     /**
