@@ -15,7 +15,7 @@ public interface FavouriteLinkRepository extends MongoRepository<FavouriteLink, 
 
     List<FavouriteLink> findFavouriteLinkByUsernameAndFoodstallserialno(String username, String foodstallserialno);
 
-    List<FavouriteLink> findUniqueFavouriteLink(String username, String hawkerserialno, String foodstallserialno);
+    List<FavouriteLink> findFavouriteLinkByUsernameAndHawkerserialnoAndFoodstallserialno(String username, String hawkerserialno, String foodstallserialno);
 
     int countFavouriteLinkByUsername(String username);
 

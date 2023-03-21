@@ -80,8 +80,9 @@ public class ReviewController {
     /**
      * Get review by all others
      */
-    @GetMapping("/user/{userName}")
-    public ResponseEntity<Optional<Review>> getReviewByUserName(@PathVariable String userName, @RequestBody Map<String, String> body) {
+    @GetMapping("/user")
+    public ResponseEntity<Optional<Review>> getReviewByUserName(@RequestBody Map<String, String> body) {
+        String userName = body.get("userName");
         String hawkerSerialno = body.get("hawkerSerialno");
         String foodStallSerialno = body.get("foodStallSerialno");
         String serialNo = reviewService.getSerialNo(userName, hawkerSerialno, foodStallSerialno);

@@ -29,7 +29,7 @@ public class FavouriteLinkService {
     }
 
     public FavouriteLink addFavouriteLinkToHawker(String username, String hawkerSerialno, String foodStallSerialno) {
-        List<FavouriteLink> favouritelink = favouritelinkrepository.findUniqueFavouriteLink(username, hawkerSerialno, foodStallSerialno);
+        List<FavouriteLink> favouritelink = favouritelinkrepository.findFavouriteLinkByUsernameAndHawkerserialnoAndFoodstallserialno(username, hawkerSerialno, foodStallSerialno);
         if (favouritelink.isEmpty()) {
             FavouriteLink newFavouriteLink = new FavouriteLink(username, hawkerSerialno, foodStallSerialno);
             return favouritelinkrepository.insert(newFavouriteLink);
