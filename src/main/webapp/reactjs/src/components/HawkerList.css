@@ -9,6 +9,25 @@
     margin-bottom: 70px;
 }
 
+/**
+Let the card have some animation effects when hovering over the mouse
+When the mouse is hovering over the card, the card will have a shadow effect and bigger
+Make the transform gradually
+ */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
 /*.text-muted{*/
 /*    text-align:right;*/
 /*}*/
@@ -35,5 +54,3 @@
     textAlign: center;
     fontWeight: bold;
 }
-
-
