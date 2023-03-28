@@ -9,6 +9,7 @@ import Welcome from "./components/Welcome"
 import Footer from "./components/Footer"
 import HawkerList from "./components/HawkerList"
 import Feedback from "./components/Feedback"
+import EditHawkers from "./components/Edit Hawkers";
 
 function App() {
     const marginTop={
@@ -26,6 +27,7 @@ function App() {
                         {/*<Route path="/add" component={Hawker}/>*/}
                         <Route path="/welcome" element={<Welcome/>}/>
                         <Route path="/list" element={<HawkerList/>}/>
+                        <Route path="/edit" element={<EditHawkers/>}/>
                         <Route path="/feedback" element={<Feedback/>}/>
                     </Routes>
                 </Col>
