@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import "./HawkerList.css"
 
-import {Card, Col, Row, Container, InputGroup, FormControl, Button} from 'react-bootstrap';
+import {Card, Col, Row, Container, InputGroup, FormControl, Button, ListGroupItem, ListGroup} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@fortawesome/free-solid-svg-icons";
@@ -25,6 +25,8 @@ export default class HawkerList extends Component {
     componentDidMount(){
         this.findAllHawkers(this.state.currentPage);
     }
+
+    // function to get all hawkers from backend
     findAllHawkers(currentPage) {
         currentPage -= 1
         axios.get("http://localhost:8080/api/v1/hawkersp?page="+currentPage+"&size="+this.state.hawkersPerPage)
@@ -39,6 +41,7 @@ export default class HawkerList extends Component {
             });
     };
 
+    // function to get a single page from backend
     searchData = (currentPage) => {
         currentPage = 0
         axios.get("http://localhost:8080/api/v1/hawkers/search?name="+this.state.search+"&page="+currentPage+"&size="+this.state.hawkersPerPage)
@@ -53,7 +56,7 @@ export default class HawkerList extends Component {
             });
     };
 
-
+    // function for page change
     changePage = event => {
         let targetPage = parseInt(event.target.value);
         this.findAllHawkers(targetPage);
@@ -62,23 +65,30 @@ export default class HawkerList extends Component {
         });
     };
 
+    // function for getting firstPage from Hawker List Pagination
     firstPage = () => {
         let firstPage = 1;
         if(this.state.currentPage > 1) {
             this.findAllHawkers(firstPage);
         }
     };
+
+    // function for getting the previous page
     prevPage = () => {
         let prevPage = 1;
         if(this.state.currentPage > 1) {
             this.findAllHawkers(this.state.currentPage - prevPage);
         }
     };
+
+    // function for getting the next page
     nextPage = () => {
         if(this.state.currentPage < Math.ceil(this.state.totalElements / this.state.hawkersPerPage)) {
             this.findAllHawkers(this.state.currentPage + 1)
         }
     };
+
+    // function for getting the last page
     lastPage = () => {
         let condition = Math.ceil(this.state.totalElements / this.state.hawkersPerPage);
         if(this.state.currentPage < condition) {
@@ -86,17 +96,21 @@ export default class HawkerList extends Component {
         }
     };
 
+    // function for searching change for the search filter
     searchChange = event =>{
         this.setState({
             [event.target.name]: event.target.value
         })
     };
 
+
+    // function to cancel search and revert back to first page
     cancelSearch = () => {
         this.setState({"search":''});
         this.findAllHawkers(1);
     };
 
+    //renders the whole HawkerList page
     render() {
         const {hawkers, currentPage, hawkersPerPage, search} = this.state;
         const totalPages = Math.ceil(this.state.totalElements / hawkersPerPage);
