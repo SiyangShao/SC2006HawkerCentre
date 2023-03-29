@@ -193,10 +193,11 @@ export default class HawkerList extends Component {
                         </Col>
                     ))}
                 </Row>
-                <div style={{"float":"left", padding:"10px 0"}}>
+                <div style={{"float":"left", padding:"60px 0"}}>
                     Showing Page {currentPage} of {totalPages}
                 </div>
-                <div style={{"float":"right", padding:"10px 0"}}>
+                <div style={{"float":"right", padding:"30px 0"}}>
+                    <div className="page-controller">
                     <InputGroup>
                         <Button type="button" variant="outline-info" disabled={currentPage===1 ? true : false}
                             onClick={this.firstPage}>
@@ -230,6 +231,7 @@ export default class HawkerList extends Component {
                         </Button>
 
                     </InputGroup>
+                    </div>
                 </div>
             </Container>
         );

@@ -33,7 +33,7 @@ function App() {
                 </Col>
             </Row>
         </Container>
-        <Footer/>
+            <Footer/>
         </div>
       </Router>
   );

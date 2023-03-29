@@ -1,12 +1,20 @@
 .my-container {
     background-color: #f0e6e4; /* replace with your desired color */
     padding-top: 10px;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
     padding-right: 20px;
     padding-left: 20px;
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 70px;
+}
+
+.page-controller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /**
