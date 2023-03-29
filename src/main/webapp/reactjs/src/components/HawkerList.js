@@ -110,10 +110,46 @@ export default class HawkerList extends Component {
         this.findAllHawkers(1);
     };
 
+    // function for getting quarter # of current date
+    currentQuarter = (date) => {
+        const currentMonth = date.getMonth();
+
+        let currentQuarter;
+        if (currentMonth >= 0 && currentMonth <=2){
+            currentQuarter = 1;
+        }
+        else if (currentMonth >= 3 && currentMonth <= 5){
+            currentQuarter = 2;
+        }
+        else if (currentMonth >=6 && currentMonth <= 8){
+            currentQuarter = 3;
+        }
+        else if (currentMonth >= 9 && currentMonth <=11){
+            currentQuarter = 4;
+        }
+        return currentQuarter
+    };
+
+    getDates = (hawkers, quarter) => {
+        let q1 = `${hawkers.q1_cleaningstartdate}`+" - "+`${hawkers.q1_cleaningenddate}`
+        let q2 = `${hawkers.q2_cleaningstartdate}`+" - "+`${hawkers.q2_cleaningenddate}`
+        let q3 = `${hawkers.q3_cleaningstartdate}`+" - "+`${hawkers.q3_cleaningenddate}`
+        let q4 = `${hawkers.q4_cleaningstartdate}`+" - "+`${hawkers.q4_cleaningenddate}`
+        const allCleanDates = [q1,q2,q3,q4]
+
+        if (allCleanDates[quarter-1] === "TBC - TBC")
+            return "-"
+
+        else
+            return allCleanDates[quarter-1]
+    };
+
     //renders the whole HawkerList page
     render() {
         const {hawkers, currentPage, hawkersPerPage, search} = this.state;
         const totalPages = Math.ceil(this.state.totalElements / hawkersPerPage);
+        const currentDate = new Date();
+        const currentQuarter = this.currentQuarter(currentDate);
 
         return (
             <Container className="my-container">
@@ -140,6 +176,19 @@ export default class HawkerList extends Component {
                                     <Card.Title>{hawker.name}</Card.Title>
                                     <Card.Text>{hawker.description_myenv}</Card.Text>
                                 </Card.Body>
+                                <ListGroup>
+                                    <ListGroup.Item>
+                                        {this.getDates(hawker,currentQuarter) === '-'
+                                            ? <Card.Text>No Closing Date!</Card.Text>
+                                            : <div>
+                                                <Card.Text>Dates Closed for Cleaning</Card.Text>
+                                                {this.getDates(hawker,currentQuarter)}
+                                            </div>}
+                                    </ListGroup.Item>
+                                </ListGroup>
+                                <Card.Footer>
+                                    <Button variant="primary">View Food Stalls</Button>
+                                </Card.Footer>
                             </Card>
                         </Col>
                     ))}
