@@ -199,14 +199,14 @@ export default class HawkerList extends Component {
                 <div style={{"float":"right", padding:"30px 0"}}>
                     <div className="page-controller">
                     <InputGroup>
-                        <Button type="button" variant="outline-info" disabled={currentPage===1 ? true : false}
+                        <Button type="button" variant="outline-info" disabled={currentPage === 1}
                             onClick={this.firstPage}>
                             <span style={{paddingRight: "5px"}}>
                                 <FontAwesomeIcon icon={faFastBackward} />
                           </span>
                             First
                         </Button>
-                        <Button type="button" variant="outline-info" disabled={currentPage===1 ? true : false}
+                        <Button type="button" variant="outline-info" disabled={currentPage === 1}
                             onClick={this.prevPage}>
                             <span style={{paddingRight: "5px"}}>
                                 <FontAwesomeIcon icon={faStepBackward} />
