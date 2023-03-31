@@ -7,6 +7,7 @@ import "./SingleHawkerCard.css"
 
 // function for getting quarter # of current date
 let currentQuarter = (date) => {
+    // console.log(date)
     const currentMonth = date.getMonth();
 
     let currentQuarter;
