@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+src/main/webapp/reactjs/src/components/models/GoogleMapKey.js
+
+GoogleMapKey.js

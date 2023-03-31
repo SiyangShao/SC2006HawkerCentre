@@ -173,7 +173,7 @@ export default class HawkerList extends Component {
                     </InputGroup>
                 </div>
                 <Row xs={1} md={3} className="g-4">
-                    {hawkers.map(hawker => singleHawkerCard(hawker, currentQuarter))}
+                    {hawkers.map(hawker => singleHawkerCard(hawker, currentDate))}
                 </Row>
                 <div style={{"float": "left", padding: "60px 0"}}>
                     Showing Page {currentPage} of {totalPages}
