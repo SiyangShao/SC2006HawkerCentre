@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 
 import "./HawkerList.css"
 
-import {Card, Col, Row, Container, InputGroup, FormControl, Button, ListGroupItem, ListGroup} from 'react-bootstrap';
+import {Row, Container, InputGroup, FormControl, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@fortawesome/free-solid-svg-icons";
 
 import axios from'axios';
+import {singleHawkerCard} from "./SingleHawkerCard";
 
 
 export default class HawkerList extends Component {
@@ -130,20 +131,6 @@ export default class HawkerList extends Component {
         return currentQuarter
     };
 
-    getDates = (hawkers, quarter) => {
-        let q1 = `${hawkers.q1_cleaningstartdate}`+" - "+`${hawkers.q1_cleaningenddate}`
-        let q2 = `${hawkers.q2_cleaningstartdate}`+" - "+`${hawkers.q2_cleaningenddate}`
-        let q3 = `${hawkers.q3_cleaningstartdate}`+" - "+`${hawkers.q3_cleaningenddate}`
-        let q4 = `${hawkers.q4_cleaningstartdate}`+" - "+`${hawkers.q4_cleaningenddate}`
-        const allCleanDates = [q1,q2,q3,q4]
-
-        if (allCleanDates[quarter-1] === "TBC - TBC")
-            return "-"
-
-        else
-            return allCleanDates[quarter-1]
-    };
-
     //renders the whole HawkerList page
     render() {
         const {hawkers, currentPage, hawkersPerPage, search} = this.state;
@@ -168,30 +155,7 @@ export default class HawkerList extends Component {
                     </InputGroup>
                 </div>
                 <Row xs={1} md={3} className="g-4">
-                    {hawkers.map((hawker) => (
-                        <Col key={hawker._id}>
-                            <Card>
-                                <Card.Img variant="top" src={hawker.photourl} />
-                                <Card.Body>
-                                    <Card.Title>{hawker.name}</Card.Title>
-                                    <Card.Text>{hawker.description_myenv}</Card.Text>
-                                </Card.Body>
-                                <ListGroup>
-                                    <ListGroup.Item>
-                                        {this.getDates(hawker,currentQuarter) === '-'
-                                            ? <Card.Text>No Closing Date!</Card.Text>
-                                            : <div>
-                                                <Card.Text>Dates Closed for Cleaning</Card.Text>
-                                                {this.getDates(hawker,currentQuarter)}
-                                            </div>}
-                                    </ListGroup.Item>
-                                </ListGroup>
-                                <Card.Footer>
-                                    <Button variant="primary">View Food Stalls</Button>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                    ))}
+                    {hawkers.map(hawker => singleHawkerCard(hawker, currentQuarter))}
                 </Row>
                 <div style={{"float":"left", padding:"60px 0"}}>
                     Showing Page {currentPage} of {totalPages}
