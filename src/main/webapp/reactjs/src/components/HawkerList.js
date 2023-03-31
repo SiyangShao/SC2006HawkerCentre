@@ -112,29 +112,12 @@ export default class HawkerList extends Component {
         this.findAllHawkers(1);
     };
 
-    // function for getting quarter # of current date
-    currentQuarter = (date) => {
-        const currentMonth = date.getMonth();
-
-        let currentQuarter;
-        if (currentMonth >= 0 && currentMonth <= 2) {
-            currentQuarter = 1;
-        } else if (currentMonth >= 3 && currentMonth <= 5) {
-            currentQuarter = 2;
-        } else if (currentMonth >= 6 && currentMonth <= 8) {
-            currentQuarter = 3;
-        } else if (currentMonth >= 9 && currentMonth <= 11) {
-            currentQuarter = 4;
-        }
-        return currentQuarter
-    };
 
     //renders the whole HawkerList page
     render() {
         const {hawkers, currentPage, hawkersPerPage, search} = this.state;
         const totalPages = Math.ceil(this.state.totalElements / hawkersPerPage);
         const currentDate = new Date();
-        const currentQuarter = this.currentQuarter(currentDate);
 
         return (
             <Container className="my-container">
@@ -173,7 +156,7 @@ export default class HawkerList extends Component {
                     </InputGroup>
                 </div>
                 <Row xs={1} md={3} className="g-4">
-                    {hawkers.map(hawker => singleHawkerCard(hawker, currentQuarter))}
+                    {hawkers.map(hawker => singleHawkerCard(hawker, currentDate))}
                 </Row>
                 <div style={{"float": "left", padding: "60px 0"}}>
                     Showing Page {currentPage} of {totalPages}
