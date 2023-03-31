@@ -1,0 +1,24 @@
+.my-modal{
+    width: 90vw;
+    max-width: 90vw;
+}
+
+.modal-height{
+    height:80vw;
+}
+
+.img-size{
+    width: 300px;
+    height: auto;
+}
+.modal-header{
+    display:flex;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

@@ -3,6 +3,7 @@ import React from "react";
 import {Button, Col, Card, ListGroup} from "react-bootstrap";
 
 import "./SingleHawkerCard.css"
+import FoodStallList from "./FoodStallList";
 
 let getDates = (hawkers, quarter) => {
     let q1 = `${hawkers.q1_cleaningstartdate}`+" - "+`${hawkers.q1_cleaningenddate}`
@@ -23,6 +24,7 @@ export const singleHawkerCard = function (hawker, currentQuarter) {
     if (hawker.serialno === undefined) {
         console.log("Hawker Serialno undefined!!! " + hawker);
     }
+
     return (
         <Col key={hawker.serialno}>
             <Card>
@@ -42,7 +44,11 @@ export const singleHawkerCard = function (hawker, currentQuarter) {
                     </ListGroup.Item>
                 </ListGroup>
                 <Card.Footer>
-                    <Button variant="primary">View Food Stalls</Button>
+                    <FoodStallList
+                        name = {hawker.name}
+                        photourl = {hawker.photourl}
+                        hawkerserial = {hawker.serialno}
+                        />
                 </Card.Footer>
             </Card>
         </Col>
