@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {useJsApiLoader, GoogleMap} from "@react-google-maps/api";
 import * as Process from "process";
+import {GOOGLE_MAPS_API_KEY} from "./GoogleMapKey";
 
 
 const containerStyle = {
@@ -16,8 +17,9 @@ const center = {
 export default function Map() {
     let isLoaded;
     ({isLoaded} = useJsApiLoader({
-        googleMapsApiKey: Process.env.GOOGLE_MAPS_API_KEY
+        googleMapsApiKey: GOOGLE_MAPS_API_KEY
     }));
+    console.log(GOOGLE_MAPS_API_KEY)
     if (!isLoaded) {
         return (
             <div>Loading...</div>
