@@ -141,7 +141,7 @@ export default class HawkerList extends Component {
                 <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                     <h3 style={{display: "flex", alignSelf: "flex-start"}}><FontAwesomeIcon icon={faUtensils}/> List
                         of Hawkers</h3>
-                    <InputGroup style={{ width: "25%" }} size="sm" className="search-bar">
+                    <InputGroup style={{width: "25%"}} size="sm" className="search-bar">
                         <FormControl
                             placeholder="Search"
                             name="search"
@@ -160,7 +160,7 @@ export default class HawkerList extends Component {
                             type="button"
                             onClick={() => this.searchData(currentPage)}
                         >
-                            <FontAwesomeIcon icon={faSearch} />
+                            <FontAwesomeIcon icon={faSearch}/>
                         </Button>
                         <Button
                             size="sm"
@@ -168,7 +168,7 @@ export default class HawkerList extends Component {
                             type="button"
                             onClick={() => this.cancelSearch(1)}
                         >
-                            <FontAwesomeIcon icon={faTimes} />
+                            <FontAwesomeIcon icon={faTimes}/>
                         </Button>
                     </InputGroup>
                 </div>
@@ -179,43 +179,41 @@ export default class HawkerList extends Component {
                     Showing Page {currentPage} of {totalPages}
                 </div>
                 <div style={{"float": "right", padding: "30px 0"}}>
-                    <div className="page-controller">
-                        <InputGroup>
-                            <Button type="button" variant="outline-info" disabled={currentPage === 1}
-                                    onClick={this.firstPage}>
+                    <InputGroup className="page-controller">
+                        <Button type="button" variant="outline-info" disabled={currentPage === 1}
+                                onClick={this.firstPage}>
                             <span style={{paddingRight: "5px"}}>
                                 <FontAwesomeIcon icon={faFastBackward}/>
                           </span>
-                                First
-                            </Button>
-                            <Button type="button" variant="outline-info" disabled={currentPage === 1}
-                                    onClick={this.prevPage}>
+                            First
+                        </Button>
+                        <Button type="button" variant="outline-info" disabled={currentPage === 1}
+                                onClick={this.prevPage}>
                             <span style={{paddingRight: "5px"}}>
                                 <FontAwesomeIcon icon={faStepBackward}/>
                             </span>
-                                Prev
-                            </Button>
-                            <FormControl className={"page-num"} name="currentPage" value={currentPage}
-                                         onChange={this.changePage}/>
-                            <Button type="button" variant="outline-info"
-                                    disabled={currentPage === totalPages ? true : false}
-                                    onClick={this.nextPage}>
+                            Prev
+                        </Button>
+                        <FormControl className="page-num" name="currentPage" value={currentPage}
+                                     onChange={this.changePage}/>
+                        <Button type="button" variant="outline-info"
+                                disabled={currentPage === totalPages}
+                                onClick={this.nextPage}>
                             <span style={{paddingRight: "5px"}}>
                                 <FontAwesomeIcon icon={faStepForward}/>
                             </span>
-                                Next
-                            </Button>
-                            <Button type="button" variant="outline-info"
-                                    disabled={currentPage === totalPages ? true : false}
-                                    onClick={this.lastPage}>
+                            Next
+                        </Button>
+                        <Button type="button" variant="outline-info"
+                                disabled={currentPage === totalPages}
+                                onClick={this.lastPage}>
                             <span style={{paddingRight: "5px"}}>
                                 <FontAwesomeIcon icon={faFastForward}/>
                             </span>
-                                Last
-                            </Button>
+                            Last
+                        </Button>
 
-                        </InputGroup>
-                    </div>
+                    </InputGroup>
                 </div>
             </Container>
         )
