@@ -8,6 +8,7 @@ import NavigationBar from "./components/NavigationBar";
 import Welcome from "./components/Welcome"
 import Footer from "./components/Footer"
 import HawkerList from "./components/HawkerList"
+import Nearest from "./components/models/Nearest";
 import Feedback from "./components/Feedback"
 import EditHawkers from "./components/EditHawkers";
 
@@ -27,6 +28,7 @@ function App() {
                         {/*<Route path="/add" component={Hawker}/>*/}
                         <Route path="/welcome" element={<Welcome/>}/>
                         <Route path="/list" element={<HawkerList/>}/>
+                        <Route path="/nearest" element={<Nearest/>}/>
                         <Route path="/edit" element={<EditHawkers/>}/>
                         <Route path="/feedback" element={<Feedback/>}/>
                     </Routes>
