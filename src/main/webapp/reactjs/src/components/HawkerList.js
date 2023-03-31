@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import "./HawkerList.css"
-import "./SearchBar.css"
+import "./models/SearchBar.css"
 
 import {Row, Container, InputGroup, FormControl, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -9,7 +9,7 @@ import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@fortawesome/free-solid-svg-icons";
 
 import axios from 'axios';
-import {singleHawkerCard} from "./SingleHawkerCard";
+import {singleHawkerCard} from "./models/SingleHawkerCard";
 
 
 export default class HawkerList extends Component {
