@@ -4,22 +4,52 @@ import {Button, Col, Card, ListGroup} from "react-bootstrap";
 
 import "./SingleHawkerCard.css"
 
-let getDates = (hawkers, quarter) => {
-    let q1 = `${hawkers.q1_cleaningstartdate}`+" - "+`${hawkers.q1_cleaningenddate}`
-    let q2 = `${hawkers.q2_cleaningstartdate}`+" - "+`${hawkers.q2_cleaningenddate}`
-    let q3 = `${hawkers.q3_cleaningstartdate}`+" - "+`${hawkers.q3_cleaningenddate}`
-    let q4 = `${hawkers.q4_cleaningstartdate}`+" - "+`${hawkers.q4_cleaningenddate}`
-    const allCleanDates = [q1,q2,q3,q4]
 
-    if (allCleanDates[quarter-1] === "TBC - TBC")
-        return "-"
+// function for getting quarter # of current date
+let currentQuarter = (date) => {
+    const currentMonth = date.getMonth();
 
-    else
-        return allCleanDates[quarter-1]
+    let currentQuarter;
+    if (currentMonth >= 0 && currentMonth <= 2) {
+        currentQuarter = 1;
+    } else if (currentMonth >= 3 && currentMonth <= 5) {
+        currentQuarter = 2;
+    } else if (currentMonth >= 6 && currentMonth <= 8) {
+        currentQuarter = 3;
+    } else if (currentMonth >= 9 && currentMonth <= 11) {
+        currentQuarter = 4;
+    }
+    return currentQuarter
 };
 
+let checkDate = (hawkers, currentDate) => {
+        let quarter = currentQuarter(currentDate)
+        let q = ["q1_", "q2_", "q3_", "q4_"]
+        let sDate = q[quarter-1]+"cleaningstartdate"
+        let eDate = q[quarter-1]+"cleaningenddate"
+        let start = hawkers[sDate]
+        let end = hawkers[eDate]
+        if ((start || end) === "TBC"){
+            return '-'
+        }
+        let [eDay, eMonth, eYear] = end.split("/");
+        let [sDay, sMonth, sYear] = start.split("/");
+        const closingEndDate = new Date(eYear+"-"+eMonth+"-"+eDay)
+        const closingStartDate = new Date(sYear+"-"+sMonth+"-"+sDay)
 
-export const singleHawkerCard = function (hawker, currentQuarter) {
+        if (closingEndDate < currentDate){
+            return '-'
+        }
+        else if (closingStartDate < currentDate < closingEndDate){
+            return `${start}`+" - "+`${end}`
+        }
+        else{
+            return `${start}`+" - "+`${end}`
+        }
+    };
+
+
+export const singleHawkerCard = function (hawker, currentDate) {
     if (hawker.serialno === undefined) {
         console.log("Hawker Serialno undefined!!! " + hawker);
     }
@@ -33,11 +63,11 @@ export const singleHawkerCard = function (hawker, currentQuarter) {
                 </Card.Body>
                 <ListGroup>
                     <ListGroup.Item>
-                        {getDates(hawker, currentQuarter) === '-'
+                        {checkDate(hawker, currentDate) === '-'
                             ? <Card.Text>No Closing Date!</Card.Text>
                             : <div>
                                 <Card.Text>Dates Closed for Cleaning</Card.Text>
-                                {getDates(hawker, currentQuarter)}
+                                {checkDate(hawker, currentDate)}
                             </div>}
                     </ListGroup.Item>
                 </ListGroup>
