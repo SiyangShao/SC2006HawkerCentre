@@ -9,7 +9,7 @@ import Welcome from "./components/Welcome"
 import Footer from "./components/Footer"
 import HawkerList from "./components/HawkerList"
 import Feedback from "./components/Feedback"
-import EditHawkers from "./components/Edit Hawkers";
+import EditHawkers from "./components/EditHawkers";
 
 function App() {
     const marginTop={
