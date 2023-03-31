@@ -118,7 +118,6 @@ export default class HawkerList extends Component {
         const {hawkers, currentPage, hawkersPerPage, search} = this.state;
         const totalPages = Math.ceil(this.state.totalElements / hawkersPerPage);
         const currentDate = new Date();
-        const currentQuarter = this.currentQuarter(currentDate);
 
         return (
             <Container className="my-container">
