@@ -58,9 +58,6 @@ public class UserService {
         if(checkUser.isEmpty()){
             return false;
         }
-//        Optional<User> currentUser = userRepository.findUserByUsername(user.getUsername());
-//        System.out.println(currentUser);
-
         if(user.getPassword()!=null && user.getPassword().length()>0){
             mongoTemplate.update(User.class)
                     .matching(Criteria.where("username").is(user.getUsername()))
