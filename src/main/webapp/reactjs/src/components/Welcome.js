@@ -17,7 +17,6 @@ function Welcome() {
                     </div>
                 </Col>
             </Row>
-            <GoogleMap/>
         </Container>
     );
 }
