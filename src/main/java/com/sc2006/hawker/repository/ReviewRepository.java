@@ -13,4 +13,8 @@ public interface ReviewRepository extends MongoRepository<Review, ObjectId> {
     Optional<Review> findBySerialNo(String serialNo);
     List<Review> findReviewByFoodStallSerialNo(String foodStallSerialNo);
     List<Review> findReviewByHawkerSerialNo(String hawkerSerialNo);
+
+    Optional<Review> findReviewByUserNameAndFoodStallSerialNo(String userName, String foodStallSerialno);
+
+    Optional<Review> findReviewByUserNameAndHawkerSerialNo(String userName, String hawkerSerialno);
 }

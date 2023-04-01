@@ -29,17 +29,19 @@ public class ReviewController {
       @param body review body
      * @return review
 
+
      commented as review cannot be created without food stall
+
+     */
     @PostMapping("/create/hawker")
     public ResponseEntity<Review> createReviewWithHawker(@RequestBody Map<String, String> body) {
         String reviewBody = body.get("reviewBody");
         Integer rating = Integer.parseInt(body.get("rating"));
         String hawkerSerialno = body.get("hawkerSerialno");
         String userName = body.get("userName");
-//        System.out.println(reviewBody + "\n" + rating + "\n" + hawkerSerialno + "\n" + userName);
+        System.out.println(reviewBody + "\n" + rating + "\n" + hawkerSerialno + "\n" + userName);
         return new ResponseEntity<>(reviewService.createReviewWithHawker(reviewBody, rating, hawkerSerialno, userName), HttpStatus.CREATED);
     }
-     */
 
     /**
      * Create a review with food stall
@@ -54,6 +56,9 @@ public class ReviewController {
         String hawkerSerialno = body.get("hawkerSerialno");
         String foodStallSerialno = body.get("foodStallSerialno");
         String userName = body.get("userName");
+
+        // if the user has already reviewed the food stall, update the review
+
         return new ResponseEntity<>(reviewService.createReviewWithFoodStall(reviewBody, rating, hawkerSerialno, foodStallSerialno, userName), HttpStatus.CREATED);
     }
 

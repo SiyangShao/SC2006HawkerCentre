@@ -14,6 +14,7 @@ import EditHawkers from "./components/EditHawkers";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Update from "./components/Update";
+import EditHawkerCentreReview from "./components/models/EditHawkerCentreReview";
 
 function App() {
     const marginTop={
@@ -38,6 +39,7 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/update" element={<Update/>}/>
+                        <Route path="/editReview/hawker" element={<EditHawkerCentreReview/>}/>
                     </Routes>
                 </Col>
             </Row>

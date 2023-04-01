@@ -64,7 +64,18 @@ public class ReviewService {
      * @return review
      */
     public Review createReviewWithHawker(String reviewBody, Integer rating, String hawkerSerialno, String userName) {
-        Review review = reviewRepository.insert(new Review(reviewBody, rating, hawkerSerialno, "", userName));
+        String foodStoreSerialNoForHawker = hawkerSerialno + "###" + "19260817";
+        if (reviewRepository.findReviewByUserNameAndFoodStallSerialNo(userName, foodStoreSerialNoForHawker).isPresent()) {
+            String serialNo = getSerialNo(userName, hawkerSerialno, foodStoreSerialNoForHawker);
+            updateReviewBySerialNo(serialNo, reviewBody, rating);
+            Optional<Review> newReview = reviewRepository.findBySerialNo(serialNo);
+            if (newReview.isPresent()) {
+                return newReview.get();
+            } else {
+                throw new IllegalArgumentException("Review not found");
+            }
+        }
+        Review review = reviewRepository.insert(new Review(reviewBody, rating, hawkerSerialno, foodStoreSerialNoForHawker, userName));
         mongoTemplate.update(Hawker.class)
                 .matching(Criteria.where("serialno").is(hawkerSerialno))
                 .apply(new Update().push("reviews").value(review))
@@ -241,5 +252,13 @@ public class ReviewService {
             total += review.getRating();
         }
         return total / reviews.size();
+    }
+
+    public Optional<Review> getReviewByUserNameAndFoodStallSerialNo(String userName, String foodStallSerialno) {
+        return reviewRepository.findReviewByUserNameAndFoodStallSerialNo(userName, foodStallSerialno);
+    }
+
+    public Optional<Review> getReviewByUserNameAndHawkerSerialNo(String userName, String hawkerSerialno) {
+        return reviewRepository.findReviewByUserNameAndHawkerSerialNo(userName, hawkerSerialno);
     }
 }

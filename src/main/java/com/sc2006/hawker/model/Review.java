@@ -42,4 +42,8 @@ public class Review {
      * The user who wrote the review.
      */
     private String userName;
+
+    public void setReviewBody(String reviewBody) {
+        this.body = reviewBody;
+    }
 }

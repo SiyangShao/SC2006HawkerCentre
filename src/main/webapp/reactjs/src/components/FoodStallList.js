@@ -12,6 +12,7 @@ import axios from 'axios';
 
 import {singleStallCard} from "./models/singleStallCard";
 import HawkerCentreReview from "./models/HawkerCentreReview";
+import EditReviewButton from "./models/EditReviewButton";
 
 export default function FoodStallList(props) {
 
@@ -70,6 +71,11 @@ export default function FoodStallList(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <HawkerCentreReview hawkerid={props.hawkerserial}/>
+                </Modal.Body>
+                <Modal.Body>
+                    <EditReviewButton hawkerID={props.hawkerserial} hawkerName={
+                        props.name
+                    }/>
                 </Modal.Body>
                 <Modal.Body>
                     <div className="foodstall-scrolling-wrapper-flexbox">
