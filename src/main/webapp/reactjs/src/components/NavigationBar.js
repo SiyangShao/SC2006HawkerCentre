@@ -7,7 +7,30 @@ import './NavigationBar.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
+function NavigationBarRight() {
+    // get current user name
+    const username = sessionStorage.getItem("username");
+    if (sessionStorage.getItem("isLoggedIn") === "true") {
+        return (
+            <Nav className="navbar-right">
+                <Link to={window.location.pathname} className="navbar-brand"><FontAwesomeIcon
+                    icon={faSignInAlt}/> Welcome {username}</Link>
+                <Link to={"logout"} className="navbar-brand"><FontAwesomeIcon icon={faSignInAlt}/> Logout</Link>
+                <Link to={"update"} className="navbar-brand"><FontAwesomeIcon icon={faSignInAlt}/> Update</Link>
+            </Nav>
+        );
+    } else {
+        return (
+            <Nav className="navbar-right">
+                <Link to={"register"} className="navbar-brand"><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
+                <Link to={"login"} className="navbar-brand"><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
+            </Nav>
+        );
+    }
+}
+
 class NavigationBar extends React.Component {
+
     render() {
         return (
             <Navbar bg="dark" variant="dark" className="navigation-bar">
@@ -24,11 +47,7 @@ class NavigationBar extends React.Component {
                         <Link to={"feedback"} className="navbar-brand">Feedback</Link>
 
                     </Nav>
-                     <Nav className="navbar-right">
-                        <Link to={"register"} className="navbar-brand"><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
-                        <Link to={"login"} className="navbar-brand"><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
-                        <Link to={"update"} className="navbar-brand"><FontAwesomeIcon icon={faSignInAlt}/> Update</Link>
-                    </Nav>
+                    <NavigationBarRight/>
                 </Container>
             </Navbar>
         );

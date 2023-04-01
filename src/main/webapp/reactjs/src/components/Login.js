@@ -17,42 +17,43 @@ export default class Login extends Component {
     }
 
     initialState = {
-        username:'', password:''
+        username: '', password: ''
     }
 
-    submitUser=event=>{
+    submitUser = event => {
         event.preventDefault();
 
         const user = {username: this.state.username, email: "test@gmail.com", password: this.state.password};
-
+        sessionStorage.setItem("username", this.state.username);
         axios.post("http://localhost:8080/api/v1/user/login", user)
-            .then((response) =>{
-                if(response.data === "success"){
+            .then((response) => {
+                if (response.data === "success") {
+                    sessionStorage.setItem("isLoggedIn", "true");
                     window.location.href = "/welcome";
-                }
-                else{
-                    this.setState({"show":true});
-                    setTimeout(() => this.setState({"show":false}), 3000);
+                } else {
+                    this.setState({"show": true});
+                    setTimeout(() => this.setState({"show": false}), 3000);
                 }
             })
         this.setState(this.initialState);
     }
 
-    resetForm = () =>{
+    resetForm = () => {
         this.setState(() => this.initialState);
     }
 
-    userChange(event){
-        this.setState({[event.target.name]:event.target.value})
+    userChange(event) {
+        this.setState({[event.target.name]: event.target.value})
     }
+
     render() {
         const {username, password} = this.state;
 
 
         return (
             <div>
-                <div style={{"display":this.state.show ? "block" : "none"}}>
-                    <MyToast children = {{show:this.state.show, message:"Error "}}/>
+                <div style={{"display": this.state.show ? "block" : "none"}}>
+                    <MyToast children={{show: this.state.show, message: "Error "}}/>
                 </div>
                 <Card className={"border border-dark bg-dark text-white"} style={{width: '30rem'}}>
                     <Card.Header>Login</Card.Header>
@@ -62,7 +63,7 @@ export default class Login extends Component {
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control required autoComplete="off"
                                               type="test" name="username" placeholder="Enter username"
-                                              onChange={this.userChange} value={username} />
+                                              onChange={this.userChange} value={username}/>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formPassword">
@@ -73,10 +74,10 @@ export default class Login extends Component {
                             </Form.Group>
 
                             <Button size="sm" variant="success" type="submit">
-                                <FontAwesomeIcon icon={faSignInAlt} /> Login
+                                <FontAwesomeIcon icon={faSignInAlt}/> Login
                             </Button>{' '}
                             <Button size="sm" variant="info" type="reset">
-                                <FontAwesomeIcon icon={faUndo} /> Reset
+                                <FontAwesomeIcon icon={faUndo}/> Reset
                             </Button>
                         </Card.Body>
                     </Form>
