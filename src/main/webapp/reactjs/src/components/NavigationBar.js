@@ -4,6 +4,8 @@ import {Nav, Navbar, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 import './NavigationBar.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
 class NavigationBar extends React.Component {
     render() {
