@@ -75,6 +75,12 @@ export default function SingleHawkerCard(props) {
                 </Card.Body>
                 <ListGroup>
                     <ListGroup.Item>
+                        <div>
+                            <Card.Text>Location:</Card.Text>
+                            {hawker.address_myenv}
+                        </div>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
                         {checkDate(hawker, currentDate) === '-'
                             ? <Card.Text>No Closing Date!</Card.Text>
                             : <div>
