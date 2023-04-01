@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 import './NavigationBar.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSignInAlt, faUserPlus, faSignOutAlt, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import {faSignInAlt, faUserPlus, faSignOutAlt, faPenToSquare, faUser} from "@fortawesome/free-solid-svg-icons";
 import {confirmLogout} from "./Logout";
 
 function NavigationBarRight() {
@@ -15,7 +15,7 @@ function NavigationBarRight() {
         return (
             <Nav className="navbar-right">
                 <Link to={window.location.pathname} className="navbar-brand"><FontAwesomeIcon
-                    icon={faSignInAlt}/> Welcome {username}</Link>
+                    icon={faUser}/> Welcome {username}</Link>
                 <Link to="#" onClick={confirmLogout} className="navbar-brand"><FontAwesomeIcon icon={faSignOutAlt}/> Logout</Link>
                 <Link to={"update"} className="navbar-brand"><FontAwesomeIcon icon={faPenToSquare}/> Update</Link>
             </Nav>
