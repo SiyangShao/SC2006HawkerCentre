@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 
 import "./Nearest.css"
 
@@ -8,6 +8,7 @@ import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios';
 import SingleHawkerCard from "./SingleHawkerCard";
+import GoogleMap from "./GoogleMap";
 
 
 
@@ -17,20 +18,39 @@ export default class Nearest extends Component {
         super(props);
         this.state = {
             hawkers: [],
-            search: ''
+            markers: [],
+            search: '',
+            showMap: false,
+            setShowMap: false
         };
     }
 
     // function to get a single page from backend
     searchNearest = () => {
-        axios.get("http://localhost:8080/api/v1/hawkers/search/nearest?postalcode=" +this.state.search)
+        axios.get("http://localhost:8080/api/v1/hawkers/search/nearest?postalcode=" + this.state.search)
             .then(response => response.data)
-            .then((data) => {
+            .then(data => {
+                let tempMarkers = [];
+                for (let i = 0; i < data.length; i++) {
+                    let lat = parseFloat(data[i].latitude_hc);
+                    let lng = parseFloat(data[i].longitude_hc);
+                    let tempMarker = {
+                        lat: lat,
+                        lng: lng
+                    };
+                    tempMarkers.push(tempMarker);
+                }
                 this.setState({
-                    hawkers: data
-                })
+                    hawkers: data,
+                    markers: tempMarkers
+                });
+                this.enableMap();
+            })
+            .catch(error => {
+                console.log(error);
             });
     };
+
 
     // function for searching change for the search filter
     searchChange = event => {
@@ -44,13 +64,31 @@ export default class Nearest extends Component {
     cancelSearch = () => {
         this.setState({"search": ''});
         this.findAllHawkers(1);
+        this.disableMap();
     };
+
+    enableMap = () => {
+        this.setState({showMap: true});
+    };
+
+    disableMap = () => {
+        this.setState({showMap: false});
+    };
+
 
 
     //renders the whole HawkerList page
     render() {
         const {hawkers, search} = this.state;
         const currentDate = new Date();
+
+        const handleMapButtonClick = () => {
+            this.state.setShowMap(true);
+        };
+
+        const handleCloseMap = () => {
+            this.state.setShowMap(false);
+        };
 
         return (
             <Container className="my-container">
@@ -87,6 +125,11 @@ export default class Nearest extends Component {
                         </Button>
                     </InputGroup>
                 </div>
+                {this.state.showMap &&
+                    (
+                        <GoogleMap markersData={this.state.markers}/>
+
+                    )}
                 <Row xs={1} md={3} className="g-4">
                     {hawkers.map(hawker => <SingleHawkerCard hawker={hawker} currentDate={currentDate} />)}
                 </Row>

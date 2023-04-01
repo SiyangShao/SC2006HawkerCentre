@@ -95,7 +95,7 @@ export default function SingleHawkerCard(props) {
                 <div>
                     <div className="map-shadow" onClick={handleCloseMap}/>
                     <div className="map-overlay">
-                        <GoogleMap lat={hawker.latitude_hc} lng={hawker.longitude_hc} />
+                        <GoogleMap markersData={[{lat: parseFloat(hawker.latitude_hc), lng: parseFloat(hawker.longitude_hc)}]} />
                     </div>
                 </div>
             )}

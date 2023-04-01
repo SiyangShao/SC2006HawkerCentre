@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 
 function GoogleMap(props) {
-    const lat = parseFloat(props.lat);
-    const lng = parseFloat(props.lng);
+    const { markersData } = props;
     const [map, setMap] = useState(null);
-    const [marker, setMarker] = useState(null);
+    const [markers, setMarkers] = useState([]);
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -15,16 +14,21 @@ function GoogleMap(props) {
     useEffect(() => {
         if (isLoaded) {
             const map = new window.google.maps.Map(document.getElementById('map'), {
-                center: { lat: lat, lng: lng },
-                zoom: 15
+                center: { lat: markersData[0].lat, lng: markersData[0].lng },
+                zoom: 14
             });
-            const marker = new window.google.maps.Marker({
-                position: { lat: lat, lng: lng },
-                map: map,
-                title: 'My Marker'
+
+            const markers = markersData.map((data) => {
+                const marker = new window.google.maps.Marker({
+                    position: { lat: data.lat, lng: data.lng },
+                    map: map,
+                    title: data.title
+                });
+                return marker;
             });
+
             setMap(map);
-            setMarker(marker);
+            setMarkers(markers);
         }
     }, [isLoaded]);
 
