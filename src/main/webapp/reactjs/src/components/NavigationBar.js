@@ -22,6 +22,11 @@ class NavigationBar extends React.Component {
                         <Link to={"feedback"} className="navbar-brand">Feedback</Link>
 
                     </Nav>
+                     <Nav className="navbar-right">
+                        <Link to={"register"} className="navbar-brand"><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
+                        <Link to={"login"} className="navbar-brand"><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
+                        <Link to={"update"} className="navbar-brand"><FontAwesomeIcon icon={faSignInAlt}/> Update</Link>
+                    </Nav>
                 </Container>
             </Navbar>
         );
