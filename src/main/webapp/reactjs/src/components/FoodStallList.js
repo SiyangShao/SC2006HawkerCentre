@@ -72,7 +72,7 @@ export default function FoodStallList(props) {
                     <HawkerCentreReview hawkerid={props.hawkerserial}/>
                 </Modal.Body>
                 <Modal.Body>
-                    <div className="scrolling-wrapper-flexbox">
+                    <div className="foodstall-scrolling-wrapper-flexbox">
                         {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
                     </div>
                 </Modal.Body>

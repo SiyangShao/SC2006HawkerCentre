@@ -2,6 +2,8 @@ import axios from "axios";
 import React, {useState, useEffect} from "react";
 import SingleReviewCard from "./SingleReviewCard";
 
+import "../FoodStallList.css"
+
 export default function HawkerReview({hawkerid}) {
     const [reviews, setReviews] = useState(null);
     console.log("ID is" + hawkerid.toString());
@@ -24,10 +26,11 @@ export default function HawkerReview({hawkerid}) {
                 No Reviews Yet
             </div>
         )
-    } else
+    } else {
         return (
-            <div className="scrolling-wrapper-flexbox">
+            <div className="review-scrolling-wrapper-flexbox">
                 {reviews.map(review => SingleReviewCard(review))}
             </div>
         )
+    }
 }

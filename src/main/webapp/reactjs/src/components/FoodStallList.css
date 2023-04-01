@@ -19,13 +19,23 @@
     background-color: #ffffe0;
 }
 
-.scrolling-wrapper-flexbox {
+.foodstall-scrolling-wrapper-flexbox {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
 
     width: 85vw;
-    height:50vw;
+    height: 45vw;
+
+}
+
+.review-scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    width: 85vw;
+    height: 25vw;
 
 }
 
