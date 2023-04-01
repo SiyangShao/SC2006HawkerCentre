@@ -37,34 +37,40 @@ public class UserService {
 
     public void addNewUser(User user) {
         Optional<User> userByUsername = userRepository.findUserByUsernameOrEmail(user.getUsername(), user.getEmail());
-        if (userByUsername.isPresent()) {
-            throw new IllegalStateException("username found");
+        if(userByUsername.isEmpty()){
+            boolean validEmail = isValidEmail(user.getEmail());
+            if(validEmail) {
+                userRepository.save(user);
+                System.out.println("Valid email.");
+                return true;
+            }
+            return false;
         }
-        boolean validEmail = isValidEmail(user.getEmail());
-        if (validEmail) {
-            userRepository.save(user);
-            System.out.println("Valid email.");
-        } else
+        else{
             System.out.println("Invalid email.");
+            return false;
+        }
     }
 
     @Transactional
     public void updateUser(User user) {
         Optional<User> checkUser = userRepository.findUserByUsername(user.getUsername());
-        if (checkUser.isEmpty()) {
-            throw new IllegalStateException("user does not exist.");
+        if(checkUser.isEmpty()){
+            return false;
         }
+//        Optional<User> currentUser = userRepository.findUserByUsername(user.getUsername());
+//        System.out.println(currentUser);
 
-        Optional<User> currentUser = userRepository.findUserByUsername(user.getUsername());
-        System.out.println(currentUser);
-
-        if (user.getPassword() != null && user.getPassword().length() > 0)
+        if(user.getPassword()!=null && user.getPassword().length()>0){
             mongoTemplate.update(User.class)
                     .matching(Criteria.where("username").is(user.getUsername()))
                     .apply(new Update().set("password", user.getPassword()))
                     .first();
+            System.out.println("Update successful");
+            return true;
+        }
         else
-            throw new IllegalStateException("new password requirements does not match");
+            return false;
     }
 
     public boolean loginUser(User user) {
