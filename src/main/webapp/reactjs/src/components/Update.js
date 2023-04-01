@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Button, Card} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUndo, faUser, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
+import {faUndo, faUser, faSignInAlt, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import MyToast from './MyToast';
 
 import axios from 'axios';
@@ -73,7 +73,7 @@ export default class Update extends Component {
                             </Form.Group>
 
                             <Button size="sm" variant="success" type="submit">
-                                <FontAwesomeIcon icon={faSignInAlt} /> Update
+                                <FontAwesomeIcon icon={faPenToSquare} /> Update
                             </Button>{' '}
                             <Button size="sm" variant="info" type="reset">
                                 <FontAwesomeIcon icon={faUndo} /> Reset
