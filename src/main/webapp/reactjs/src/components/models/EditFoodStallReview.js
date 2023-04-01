@@ -76,25 +76,30 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function EditHawkerCentreReview() {
+export default function EditFoodStallReview() {
     const userName = sessionStorage.getItem("username");
     const hawkerSerialno = sessionStorage.getItem("hawkerID");
     const hawkerName = sessionStorage.getItem("hawkerName");
-    const [reviewBody, setReviewBody] = useState("");
+    const foodStallSerialno = sessionStorage.getItem("foodStallID");
+    const foodStallName = sessionStorage.getItem("foodStallName");
+    const [realReviewBody, setRealReviewBody] = useState("");
     const [rating, setRating] = useState("");
 
     const handleSubmit = (event) => {
         console.log("username: " + userName);
         console.log("hawkerID: " + hawkerSerialno);
         console.log("hawkerName: " + hawkerName);
-        console.log("review: " + reviewBody);
+        console.log("foodStallID: " + foodStallSerialno);
+        console.log("foodStallName: " + foodStallName);
+        console.log("review: " + realReviewBody);
         console.log("rating: " + rating);
-
+        const reviewBody = realReviewBody + "\nFor food stall: " + foodStallName;
         event.preventDefault();
-        axios.post("http://localhost:8080/api/v1/reviews/create/hawker", { userName, hawkerSerialno, hawkerName, reviewBody, rating })
+        axios.post("http://localhost:8080/api/v1/reviews/create/foodstall", { userName, hawkerSerialno, foodStallSerialno, hawkerName, reviewBody, rating })
             .then(response => {
                 console.log("Review created successfully:", response.data);
                 alert("Review created successfully");
+                // go back to previous page
                 window.history.back();
                 // You can navigate to another page or show a success message here
             })
@@ -110,6 +115,7 @@ export default function EditHawkerCentreReview() {
             {/*<h2>Username: {username}</h2>*/}
             {/*<h2>Hawker ID: {hawkerID}</h2>*/}
             <h3>Hawker Name: {hawkerName}</h3>
+            <h3>Food Stall Name: {foodStallName}</h3>
             <form onSubmit={handleSubmit}>
                 <label>
                     Rating (out of 5):
@@ -118,7 +124,7 @@ export default function EditHawkerCentreReview() {
                 <br />
                 <label>
                     Review:
-                    <textarea value={reviewBody} onChange={(e) => setReviewBody(e.target.value)} />
+                    <textarea value={realReviewBody} onChange={(e) => setRealReviewBody(e.target.value)} />
                 </label>
                 <br />
                 <button type="submit">Submit</button>

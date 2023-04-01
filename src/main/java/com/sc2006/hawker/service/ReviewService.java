@@ -101,6 +101,16 @@ public class ReviewService {
 //        if (!hawkerSerialNo.equals(Query.query(Criteria.where("serialno").is(foodStallSerialno)).toString())) {
 //            throw new IllegalArgumentException("Hawker serial number does not match food stall serial number");
 //        }
+        if (reviewRepository.findReviewByUserNameAndFoodStallSerialNo(userName, foodStallSerialno).isPresent()) {
+            String serialNo = getSerialNo(userName, hawkerSerialNo, foodStallSerialno);
+            updateReviewBySerialNo(serialNo, reviewBody, rating);
+            Optional<Review> newReview = reviewRepository.findBySerialNo(serialNo);
+            if (newReview.isPresent()) {
+                return newReview.get();
+            } else {
+                throw new IllegalArgumentException("Review not found");
+            }
+        }
         Review review = reviewRepository.insert(new Review(reviewBody, rating, hawkerSerialNo, foodStallSerialno, userName));
         mongoTemplate.update(FoodStall.class)
                 .matching(Query.query(Criteria.where("serialno").is(foodStallSerialno)))
@@ -260,5 +270,9 @@ public class ReviewService {
 
     public Optional<Review> getReviewByUserNameAndHawkerSerialNo(String userName, String hawkerSerialno) {
         return reviewRepository.findReviewByUserNameAndHawkerSerialNo(userName, hawkerSerialno);
+    }
+
+    public List<Review> getReviewsByHawkerAndFoodStall(String hawkerserialno, String foodstallserialno) {
+        return reviewRepository.findReviewByHawkerSerialNoAndFoodStallSerialNo(hawkerserialno, foodstallserialno);
     }
 }

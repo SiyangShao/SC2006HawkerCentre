@@ -16,7 +16,7 @@ export default function Rating({ hawker }) {
     if (!isNaN(ratingData)) {
         return (
             <div>
-                AverageRating: {ratingData}
+                AverageRating: {ratingData.toFixed(2)}
             </div>
         );
     }

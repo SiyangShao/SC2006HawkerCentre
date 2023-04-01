@@ -175,4 +175,9 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.getFoodStallRating(foodStallSerialNo), HttpStatus.OK);
     }
 
+    @GetMapping("/foodstallfromhakwer/{hawkerserialno}/{foodstallserialno}")
+    public ResponseEntity<List<Review>> getReviewsByHawkerAndFoodStall(@PathVariable String hawkerserialno, @PathVariable String foodstallserialno) {
+        return new ResponseEntity<>(reviewService.getReviewsByHawkerAndFoodStall(hawkerserialno, foodstallserialno), HttpStatus.OK);
+    }
+
 }

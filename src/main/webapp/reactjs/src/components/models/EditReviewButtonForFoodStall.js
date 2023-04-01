@@ -1,7 +1,7 @@
 import React from "react";
 import {Button} from "react-bootstrap";
 
-export default function EditReviewButton({hawkerID, hawkerName}) {
+export default function EditReviewButtonForFoodStall({hawkerID, hawkerName, foodStallID, foodStallName}) {
     return (
         <Button onClick={() => {
             const loginStatus = sessionStorage.getItem("isLoggedIn");
@@ -11,15 +11,17 @@ export default function EditReviewButton({hawkerID, hawkerName}) {
             } else {
                 sessionStorage.setItem("hawkerID", hawkerID);
                 sessionStorage.setItem("hawkerName", hawkerName);
+                sessionStorage.setItem("foodStallID", foodStallID);
+                sessionStorage.setItem("foodStallName", foodStallName);
                 // alert("hawkerID: " + sessionStorage.getItem("hawkerID"));
-                window.location.href = "/editReview/hawker";
+                window.location.href = "/editReview/foodStall";
             }
         }
         }
                 variant="primary"
                 size="sm"
         >
-Create / Edit Review
+            Create / Edit Review
         </Button>
     );
     // const loginStatus = sessionStorage.getItem("isLoggedIn");

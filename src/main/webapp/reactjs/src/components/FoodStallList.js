@@ -79,7 +79,7 @@ export default function FoodStallList(props) {
                 </Modal.Body>
                 <Modal.Body>
                     <div className="foodstall-scrolling-wrapper-flexbox">
-                        {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
+                        {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate, props.hawkerserial, props.name))}
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
