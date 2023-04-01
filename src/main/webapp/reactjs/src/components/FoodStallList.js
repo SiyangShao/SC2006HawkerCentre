@@ -10,7 +10,7 @@ import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@for
 
 import axios from'axios';
 
-
+import {singleStallCard} from "./models/singleStallCard";
 
 export default function FoodStallList(props){
 
@@ -45,8 +45,10 @@ export default function FoodStallList(props){
         return <div>Loading...</div>;
     }
     //debugging to check for above if the code ever breaks again
-    console.log(isLoading);
-    console.log(foodstalls);
+ //   console.log(isLoading);
+ //   console.log(foodstalls);
+
+    const currentDate = new Date();
 
     return (
         <>
@@ -62,19 +64,11 @@ export default function FoodStallList(props){
                     </Container>
                 </Modal.Header>
                 <Modal.Body>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={foodstalls[0].photourl} />
-                        <Card.Body>
-                            <Card.Title>{foodstalls[0].name}</Card.Title>
-                            <Card.Text>{foodstalls[0].description}</Card.Text>
-                        </Card.Body>
-                        <ListGroup>
-                            <ListGroup.Item>
-                            </ListGroup.Item>
-                        </ListGroup>
-                        <Card.Footer>
-                        </Card.Footer>
-                    </Card>
+                    <div>
+                        <Row xs={1} md={3} className="g-4">
+                            {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
+                        </Row>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
