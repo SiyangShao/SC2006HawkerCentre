@@ -64,11 +64,9 @@ export default function FoodStallList(props){
                     </Container>
                 </Modal.Header>
                 <Modal.Body>
-                        <Row xs={1} md={3} className="row-cols-auto">
-                            <div className="scrolling-wrapper-flexbox">
-                            {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
-                            </div>
-                        </Row>
+                    <div className="scrolling-wrapper-flexbox">
+                    {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
