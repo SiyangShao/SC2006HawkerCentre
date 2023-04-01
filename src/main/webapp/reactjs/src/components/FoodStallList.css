@@ -1,10 +1,10 @@
 .my-modal{
-    width: 90vw;
-    max-width: 90vw;
+    width: 90%;
+    max-width: 90%;
 }
 
 .modal-height{
-    height:80vw;
+    height:90%;
 }
 
 .img-size{
@@ -14,3 +14,18 @@
 .modal-header{
     display:flex;
 }
+
+.fs-modal .modal-content{
+    background-color: #ffffe0;
+}
+
+.scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    width: 45vw;
+    height:40vw;
+
+}
+

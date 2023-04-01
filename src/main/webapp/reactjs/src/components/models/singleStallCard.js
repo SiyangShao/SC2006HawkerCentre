@@ -18,7 +18,7 @@ export const singleStallCard = function (foodstall, currentDate) {
                     <Card.Text>#{foodstall.stallnumber}</Card.Text>
                 </Card.Body>
                 <ListGroup>
-                    <ListGroup.Item display = 'flex'>
+                    <ListGroup.Item>
                         <Card.Text>{foodstall.openingHours}</Card.Text>
                     </ListGroup.Item>
                 </ListGroup>

@@ -56,7 +56,7 @@ export default function FoodStallList(props){
                 View Food Stalls
             </Button>
 
-            <Modal show={show} onHide={handleClose} dialogClassName="my-modal" contentClassName="modal-height">
+            <Modal show={show} onHide={handleClose} dialogClassName="my-modal " contentClassName="modal-height" className="fs-modal">
                 <Modal.Header>
                     <Container className="modal-header">
                     <Modal.Title>{props.name}</Modal.Title>
@@ -64,11 +64,11 @@ export default function FoodStallList(props){
                     </Container>
                 </Modal.Header>
                 <Modal.Body>
-                    <div>
-                        <Row xs={"auto"} md={"auto"} className="row-cols-auto">
+                        <Row xs={1} md={3} className="row-cols-auto">
+                            <div className="scrolling-wrapper-flexbox">
                             {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
+                            </div>
                         </Row>
-                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
