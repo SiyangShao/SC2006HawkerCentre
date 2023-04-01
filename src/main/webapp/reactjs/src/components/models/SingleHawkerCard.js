@@ -1,10 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 
 import {Button, Col, Card, ListGroup} from "react-bootstrap";
 
 import "./SingleHawkerCard.css"
-import FoodStallList from "../FoodStallList";
-
+import FoodStallList from "../FoodStallList.js";
+import GoogleMap from "./GoogleMap.js";
 
 // function for getting quarter # of current date
 let currentQuarter = (date) => {
@@ -41,7 +41,7 @@ let checkDate = (hawkers, currentDate) => {
         if (closingEndDate < currentDate){
             return '-'
         }
-        else if (closingStartDate < currentDate < closingEndDate){
+        else if (closingStartDate < currentDate && currentDate < closingEndDate){
             return `${start}`+" - "+`${end}`
         }
         else{
@@ -50,7 +50,18 @@ let checkDate = (hawkers, currentDate) => {
     };
 
 
-export const singleHawkerCard = function (hawker, currentDate) {
+export default function SingleHawkerCard(props) {
+    const {hawker, currentDate} = props;
+    const [showMap, setShowMap] = useState(false);
+
+    const handleMapButtonClick = () => {
+        setShowMap(true);
+    };
+
+    const handleCloseMap = () => {
+        setShowMap(false);
+    };
+
     if (hawker.serialno === undefined) {
         console.log("Hawker Serialno undefined!!! " + hawker);
     }
@@ -73,13 +84,21 @@ export const singleHawkerCard = function (hawker, currentDate) {
                     </ListGroup.Item>
                 </ListGroup>
                 <Card.Footer>
+                    <Button variant="primary" onClick={handleMapButtonClick}>View Map</Button>
                     <FoodStallList
                         name = {hawker.name}
                         photourl = {hawker.photourl}
                         hawkerserial = {hawker.serialno}
-                    />
-                </Card.Footer>
+                    />                </Card.Footer>
             </Card>
+            {showMap && (
+                <div>
+                    <div className="map-shadow" onClick={handleCloseMap}/>
+                    <div className="map-overlay">
+                        <GoogleMap lat={hawker.latitude_hc} lng={hawker.longitude_hc} />
+                    </div>
+                </div>
+            )}
         </Col>
     );
 };

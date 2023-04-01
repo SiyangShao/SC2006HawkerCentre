@@ -2,7 +2,6 @@ import React from 'react';
 
 import './Welcome.css'
 import { Container, Row, Col } from 'react-bootstrap';
-import Map from "./models/GoogleMap";
 
 function Welcome() {
     return (
@@ -14,7 +13,6 @@ function Welcome() {
                         <p className="lead">
                             Don't waste your time going Hawkers that are NOT open!
                         </p>
-                        <Map/>
                     </div>
                 </Col>
             </Row>

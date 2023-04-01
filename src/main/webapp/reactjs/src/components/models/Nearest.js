@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios';
-import {singleHawkerCard} from "./SingleHawkerCard";
+import SingleHawkerCard from "./SingleHawkerCard";
 
 
 
@@ -88,7 +88,7 @@ export default class Nearest extends Component {
                     </InputGroup>
                 </div>
                 <Row xs={1} md={3} className="g-4">
-                    {hawkers.map(hawker => singleHawkerCard(hawker, currentDate))}
+                    {hawkers.map(hawker => <SingleHawkerCard hawker={hawker} currentDate={currentDate} />)}
                 </Row>
             </Container>
         )
