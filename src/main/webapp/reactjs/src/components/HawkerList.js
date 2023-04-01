@@ -9,7 +9,8 @@ import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@fortawesome/free-solid-svg-icons";
 
 import axios from 'axios';
-import {singleHawkerCard} from "./models/SingleHawkerCard";
+import SingleHawkerCard from "./models/SingleHawkerCard.js";
+import GoogleMap from "./models/GoogleMap.js";
 
 
 export default class HawkerList extends Component {
@@ -155,8 +156,9 @@ export default class HawkerList extends Component {
                         </Button>
                     </InputGroup>
                 </div>
+                {/*<GoogleMap/>*/}
                 <Row xs={1} md={3} className="g-4">
-                    {hawkers.map(hawker => singleHawkerCard(hawker, currentDate))}
+                    {hawkers.map(hawker => <SingleHawkerCard hawker={hawker} currentDate={currentDate} />)}
                 </Row>
                 <div style={{"float": "left", padding: "60px 0"}}>
                     Showing Page {currentPage} of {totalPages}
