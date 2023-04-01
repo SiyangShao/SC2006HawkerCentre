@@ -9,9 +9,10 @@ export default function EditReviewButtonForFoodStall({hawkerID, hawkerName, food
                 alert("Please login first before publishing a review!");
                 window.location.href = "/login";
             } else {
+                let foodstoreSerail = hawkerID + hawkerName + foodStallID + foodStallName;
                 sessionStorage.setItem("hawkerID", hawkerID);
                 sessionStorage.setItem("hawkerName", hawkerName);
-                sessionStorage.setItem("foodStallID", foodStallID);
+                sessionStorage.setItem("foodStallID", foodstoreSerail);
                 sessionStorage.setItem("foodStallName", foodStallName);
                 // alert("hawkerID: " + sessionStorage.getItem("hawkerID"));
                 window.location.href = "/editReview/foodStall";

@@ -11,6 +11,8 @@ import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@for
 import axios from 'axios';
 import SingleHawkerCard from "./models/SingleHawkerCard.js";
 import GoogleMap from "./models/GoogleMap.js";
+import ListAllHawkersFromFav from "./ListAllHawkersFromFav";
+
 
 export default function EditHawkers() {
 
@@ -39,29 +41,9 @@ export default function EditHawkers() {
         }
     }, [status, username]);
     console.log(hawkerIDs);
-    const currentDate = new Date();
 
-    const [hawkers, setHawkers] = useState([]);
-    useEffect(() => {
-        axios.put(`http://localhost:8080/api/v1/hawkers/fromfav`, hawkerIDs)
-            .then(response => {
-                setHawkers(response.data);
-            }).catch(error => {
-            console.error(error);
-        })
-    });
-    console.log(hawkers);
     return (
-        <Container className="my-container">
-            <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-                <h3 style={{display: "flex", alignSelf: "flex-start"}}><FontAwesomeIcon icon={faUtensils}/> List
-                    of Hawkers</h3>
-            </div>
-            {/*/!*<GoogleMap/>*!/*/}
-            {/*<Row xs={1} md={3} className="g-4">*/}
-            {/*    {hawkers.map(hawker => <SingleHawkerCard hawker={hawker} currentDate={currentDate}/>)}*/}
-            {/*</Row>*/}
+        <ListAllHawkersFromFav hawkerIDs={hawkerIDs}/>
+    );
 
-        </Container>
-    )
 }

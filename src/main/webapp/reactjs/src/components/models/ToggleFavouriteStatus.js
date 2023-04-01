@@ -14,6 +14,8 @@ let clickToggle = (hawkerSerialno) => {
             response.data
         );
         alert("Link changed successfully: " + response.data);
+        // refresh page
+        window.location.reload();
     }).catch(error => {
         console.log("Error in ToggleFavouriteStatus: " + error);
         alert("Error in ToggleFavouriteStatus: " + error);
