@@ -11,6 +11,9 @@ import HawkerList from "./components/HawkerList"
 import Nearest from "./components/models/Nearest";
 import Feedback from "./components/Feedback"
 import EditHawkers from "./components/EditHawkers";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Update from "./components/Update";
 
 function App() {
     const marginTop={
@@ -31,6 +34,9 @@ function App() {
                         <Route path="/nearest" element={<Nearest/>}/>
                         <Route path="/edit" element={<EditHawkers/>}/>
                         <Route path="/feedback" element={<Feedback/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/update" element={<Update/>}/>
                     </Routes>
                 </Col>
             </Row>
