@@ -2,6 +2,7 @@ import React from 'react';
 
 import './Welcome.css'
 import { Container, Row, Col } from 'react-bootstrap';
+import GoogleMap from "./models/GoogleMap";
 
 function Welcome() {
     return (
@@ -16,6 +17,7 @@ function Welcome() {
                     </div>
                 </Col>
             </Row>
+            <GoogleMap/>
         </Container>
     );
 }

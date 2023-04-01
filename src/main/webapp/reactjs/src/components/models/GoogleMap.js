@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
+import {GOOGLE_MAPS_API_KEY} from "./GoogleMapKey";
 
 function GoogleMap(props) {
     const { markersData } = props;
@@ -8,7 +9,7 @@ function GoogleMap(props) {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: 'AIzaSyDyp9DGeg5DXBpSTrAcPdFaSWx0YUZk5Nc'
+        googleMapsApiKey: GOOGLE_MAPS_API_KEY
     });
 
     useEffect(() => {

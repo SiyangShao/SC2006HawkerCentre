@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public void createNewAccount(@RequestBody User user) {
+    public ResponseEntity<String> createNewAccount(@RequestBody User user) {
         boolean exist = userService.addNewUser(user);
         if (exist==true)
             return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public void updateUserAccount(@RequestBody User user) {
+    public ResponseEntity<String> updateUserAccount(@RequestBody User user) {
         boolean exist = userService.updateUser(user);
         if (exist==true)
             return new ResponseEntity<String>("success", HttpStatus.OK);
