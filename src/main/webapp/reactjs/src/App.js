@@ -37,7 +37,7 @@ function App() {
                         <Route path="/list" element={<HawkerList/>}/>
                         <Route path="/nearest" element={<Nearest/>}/>
                         {/*TODO: Change edit into Favourite Link*/}
-                        {/*<Route path="/edit" element={<EditHawkers/>}/>*/}
+                        <Route path="/edit" element={<EditHawkers/>}/>
                         <Route path="/feedback" element={<Feedback/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>

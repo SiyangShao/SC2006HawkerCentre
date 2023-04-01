@@ -1,6 +1,7 @@
 package com.sc2006.hawker.service;
 
 import com.sc2006.hawker.model.FavouriteLink;
+import com.sc2006.hawker.model.Hawker;
 import com.sc2006.hawker.repository.FavouriteLinkRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

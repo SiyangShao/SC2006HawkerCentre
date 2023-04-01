@@ -44,7 +44,7 @@ class NavigationBar extends React.Component {
                     <Nav className="me-auto">
                         <Link to={"list"} className="navbar-brand">Hawker List</Link>
                         <Link to={"nearest"} className="navbar-brand">Hawkers Near You</Link>
-                        <Link to={"edit"} className="navbar-brand">Edit Hawkers</Link>
+                        <Link to={"edit"} className="navbar-brand">Favourite Link</Link>
                         <Link to={"feedback"} className="navbar-brand">Feedback</Link>
 
                     </Nav>

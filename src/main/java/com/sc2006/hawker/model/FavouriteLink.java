@@ -26,4 +26,12 @@ public class FavouriteLink {
         this.hawkerserialno = hawkerserialno;
         this.foodstallserialno = foodstallserialno;
     }
+
+    public String getHawkerSerialno() {
+        return hawkerserialno;
+    }
+
+    public String getHawkerserialno() {
+        return hawkerserialno;
+    }
 }

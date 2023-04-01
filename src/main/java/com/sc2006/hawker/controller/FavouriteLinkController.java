@@ -1,6 +1,7 @@
 package com.sc2006.hawker.controller;
 
 import com.sc2006.hawker.model.FavouriteLink;
+import com.sc2006.hawker.model.Hawker;
 import com.sc2006.hawker.service.FavouriteLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

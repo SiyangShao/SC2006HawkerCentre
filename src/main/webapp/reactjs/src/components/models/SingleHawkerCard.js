@@ -6,6 +6,7 @@ import "./SingleHawkerCard.css"
 import FoodStallList from "../FoodStallList.js";
 import GoogleMap from "./GoogleMap.js";
 import Rating from "./Rating";
+import ToggleFavouriteStatus from "./ToggleFavouriteStatus";
 
 // function for getting quarter # of current date
 let currentQuarter = (date) => {
@@ -97,7 +98,9 @@ export default function SingleHawkerCard(props) {
                         name={hawker.name}
                         photourl={hawker.photourl}
                         hawkerserial={hawker.serialno}
-                    /> </Card.Footer>
+                    />
+                    <ToggleFavouriteStatus hawkerSerialno={hawker.serialno}/>
+                </Card.Footer>
             </Card>
             {showMap && (
                 <div>

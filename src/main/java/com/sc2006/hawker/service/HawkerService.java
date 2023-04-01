@@ -3,6 +3,7 @@ package com.sc2006.hawker.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sc2006.hawker.model.FavouriteLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -119,6 +120,15 @@ public class HawkerService {
     //Converts degree to radians for Haversine formula
     private double deg2rad(double deg) {
         return deg * (Math.PI / 180);
+    }
+
+    public List<Hawker> hawkersFromFav(List<FavouriteLink> favouriteLinks) {
+        List<Hawker> hawkers = new ArrayList<>();
+        for (FavouriteLink favouriteLink: favouriteLinks){
+            Optional<Hawker> hawker = hawkerrepository.findHawkerBySerialno(favouriteLink.getHawkerSerialno());
+            hawker.ifPresent(hawkers::add);
+        }
+        return hawkers;
     }
 
 //    public

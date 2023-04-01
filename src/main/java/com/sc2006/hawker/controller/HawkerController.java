@@ -1,6 +1,7 @@
 package com.sc2006.hawker.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sc2006.hawker.model.FavouriteLink;
 import com.sc2006.hawker.model.Hawker;
 import com.sc2006.hawker.service.HawkerService;
 import org.springframework.data.domain.Page;
@@ -51,6 +52,11 @@ public class HawkerController {
     @GetMapping("/hawkers/search/nearest")
     public ResponseEntity<List<Hawker>> getNearestHawkersByPostalCode(@RequestParam String postalcode) throws JsonProcessingException {
         return new ResponseEntity<List<Hawker>>(hawkerservice.hawkerByPostalCode(postalcode), HttpStatus.OK);
+    }
+
+    @PutMapping("/hawkers/fromfav")
+    public ResponseEntity<List<Hawker>> getHawkersFromFav(@RequestBody List<FavouriteLink> favouriteLinks) throws JsonProcessingException {
+        return new ResponseEntity<List<Hawker>>(hawkerservice.hawkersFromFav(favouriteLinks), HttpStatus.OK);
     }
 
 //    @GetMapping("/hawkers/search/ophours")
