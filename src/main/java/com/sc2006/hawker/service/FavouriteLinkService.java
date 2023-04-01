@@ -149,4 +149,12 @@ public class FavouriteLinkService {
     public List<FavouriteLink> getListOfFavouriteForFoodStall(String serialno) {
         return favouritelinkrepository.findFavouriteLinkByFoodstallserialno(serialno);
     }
+
+    public void updateFavouriteLink(String username, String hawkerSerialno) {
+        if (checkFavouriteLinkToHawker(username, hawkerSerialno)) {
+            deleteFavouriteLinkToHawker(username, hawkerSerialno);
+        } else {
+            addFavouriteLinkToHawker(username, hawkerSerialno, null);
+        }
+    }
 }

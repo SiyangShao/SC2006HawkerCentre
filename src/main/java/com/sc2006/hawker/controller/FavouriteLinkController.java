@@ -115,4 +115,11 @@ public class FavouriteLinkController {
     public List<FavouriteLink> getListOfFavouriteForFoodStall(@PathVariable String serialno) {
         return favouritelinkservice.getListOfFavouriteForFoodStall(serialno);
     }
+
+    @PutMapping("/update")
+    public void updateFavouriteLink(@RequestBody Map<String, String> body) {
+        String username = body.get("username");
+        String hawkerSerialno = body.get("hawkerSerialno");
+        favouritelinkservice.updateFavouriteLink(username, hawkerSerialno);
+    }
 }
