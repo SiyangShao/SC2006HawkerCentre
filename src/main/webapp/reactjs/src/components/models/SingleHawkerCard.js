@@ -3,6 +3,7 @@ import React from "react";
 import {Button, Col, Card, ListGroup} from "react-bootstrap";
 
 import "./SingleHawkerCard.css"
+import FoodStallList from "../FoodStallList";
 
 
 // function for getting quarter # of current date
@@ -72,7 +73,11 @@ export const singleHawkerCard = function (hawker, currentDate) {
                     </ListGroup.Item>
                 </ListGroup>
                 <Card.Footer>
-                    <Button variant="primary">View Food Stalls</Button>
+                    <FoodStallList
+                        name = {hawker.name}
+                        photourl = {hawker.photourl}
+                        hawkerserial = {hawker.serialno}
+                    />
                 </Card.Footer>
             </Card>
         </Col>
