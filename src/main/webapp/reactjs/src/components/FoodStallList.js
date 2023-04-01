@@ -21,7 +21,7 @@ export default function FoodStallList(props){
 
     //can concat with other foodstall ids once database is updated
     function getAllFoodStalls() {
-        axios.get("http://localhost:8080/api/v1/foodstalls/1")
+        axios.get("http://localhost:8080/api/v1/foodstalls/72")
             .then(response => response.data)
             .then((data) => {
                getFoodstalls(data)
@@ -46,7 +46,7 @@ export default function FoodStallList(props){
     }
     //debugging to check for above if the code ever breaks again
  //   console.log(isLoading);
- //   console.log(foodstalls);
+    console.log(foodstalls);
 
     const currentDate = new Date();
 
@@ -65,7 +65,7 @@ export default function FoodStallList(props){
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        <Row xs={1} md={3} className="g-4">
+                        <Row xs={"auto"} md={"auto"} className="row-cols-auto">
                             {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
                         </Row>
                     </div>
