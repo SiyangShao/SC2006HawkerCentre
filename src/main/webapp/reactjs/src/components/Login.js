@@ -4,7 +4,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUndo, faUser, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import MyToast from './MyToast';
 
-import {UserContext} from "./LoginContent";
 import axios from 'axios';
 
 export default class Login extends Component {
