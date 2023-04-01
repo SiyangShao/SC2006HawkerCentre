@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import "./FoodStallList.css"
 import HawkerList from "./HawkerList";
@@ -8,11 +8,12 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@fortawesome/free-solid-svg-icons";
 
-import axios from'axios';
+import axios from 'axios';
 
 import {singleStallCard} from "./models/singleStallCard";
+import HawkerCentreReview from "./models/HawkerCentreReview";
 
-export default function FoodStallList(props){
+export default function FoodStallList(props) {
 
     const [foodstalls, getFoodstalls] = useState([]);
 
@@ -24,11 +25,12 @@ export default function FoodStallList(props){
         axios.get("http://localhost:8080/api/v1/foodstalls/72")
             .then(response => response.data)
             .then((data) => {
-               getFoodstalls(data)
+                getFoodstalls(data)
             })
-    };
+    }
 
-    useEffect (() => {
+
+    useEffect(() => {
         getAllFoodStalls();
     }, []);
 
@@ -40,15 +42,17 @@ export default function FoodStallList(props){
 
     //loading screen
     //yes this is necessary
-    if (isLoading){
+    if (isLoading) {
         if (foodstalls[0] !== undefined) setIsLoading(false);
         return <div>Loading...</div>;
     }
     //debugging to check for above if the code ever breaks again
- //   console.log(isLoading);
+    //   console.log(isLoading);
     console.log(foodstalls);
 
     const currentDate = new Date();
+
+
 
     return (
         <>
@@ -56,16 +60,20 @@ export default function FoodStallList(props){
                 View Food Stalls
             </Button>
 
-            <Modal show={show} onHide={handleClose} dialogClassName="my-modal " contentClassName="modal-height" className="fs-modal">
+            <Modal show={show} onHide={handleClose} dialogClassName="my-modal " contentClassName="modal-height"
+                   className="fs-modal">
                 <Modal.Header>
                     <Container className="modal-header">
-                    <Modal.Title>{props.name}</Modal.Title>
-                    <img class="img-size" src={props.photourl}/>
+                        <Modal.Title>{props.name}</Modal.Title>
+                        <img class="img-size" src={props.photourl}/>
                     </Container>
                 </Modal.Header>
                 <Modal.Body>
+                    <HawkerCentreReview hawkerid={props.hawkerserial}/>
+                </Modal.Body>
+                <Modal.Body>
                     <div className="scrolling-wrapper-flexbox">
-                    {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
+                        {foodstalls.map(foodstall => singleStallCard(foodstall, currentDate))}
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

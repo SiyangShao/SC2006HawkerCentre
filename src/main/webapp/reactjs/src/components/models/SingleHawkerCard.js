@@ -1,10 +1,11 @@
-import React,{useState} from "react";
+import React, {useState} from "react";
 
 import {Button, Col, Card, ListGroup} from "react-bootstrap";
 
 import "./SingleHawkerCard.css"
 import FoodStallList from "../FoodStallList.js";
 import GoogleMap from "./GoogleMap.js";
+import Rating from "./Rating";
 
 // function for getting quarter # of current date
 let currentQuarter = (date) => {
@@ -24,30 +25,28 @@ let currentQuarter = (date) => {
 };
 
 let checkDate = (hawkers, currentDate) => {
-        let quarter = currentQuarter(currentDate)
-        let q = ["q1_", "q2_", "q3_", "q4_"]
-        let sDate = q[quarter-1]+"cleaningstartdate"
-        let eDate = q[quarter-1]+"cleaningenddate"
-        let start = hawkers[sDate]
-        let end = hawkers[eDate]
-        if ((start || end) === "TBC"){
-            return '-'
-        }
-        let [eDay, eMonth, eYear] = end.split("/");
-        let [sDay, sMonth, sYear] = start.split("/");
-        const closingEndDate = new Date(eYear+"-"+eMonth+"-"+eDay)
-        const closingStartDate = new Date(sYear+"-"+sMonth+"-"+sDay)
+    let quarter = currentQuarter(currentDate)
+    let q = ["q1_", "q2_", "q3_", "q4_"]
+    let sDate = q[quarter - 1] + "cleaningstartdate"
+    let eDate = q[quarter - 1] + "cleaningenddate"
+    let start = hawkers[sDate]
+    let end = hawkers[eDate]
+    if ((start || end) === "TBC") {
+        return '-'
+    }
+    let [eDay, eMonth, eYear] = end.split("/");
+    let [sDay, sMonth, sYear] = start.split("/");
+    const closingEndDate = new Date(eYear + "-" + eMonth + "-" + eDay)
+    const closingStartDate = new Date(sYear + "-" + sMonth + "-" + sDay)
 
-        if (closingEndDate < currentDate){
-            return '-'
-        }
-        else if (closingStartDate < currentDate && currentDate < closingEndDate){
-            return `${start}`+" - "+`${end}`
-        }
-        else{
-            return `${start}`+" - "+`${end}`
-        }
-    };
+    if (closingEndDate < currentDate) {
+        return '-'
+    } else if (closingStartDate < currentDate && currentDate < closingEndDate) {
+        return `${start}` + " - " + `${end}`
+    } else {
+        return `${start}` + " - " + `${end}`
+    }
+};
 
 
 export default function SingleHawkerCard(props) {
@@ -75,6 +74,9 @@ export default function SingleHawkerCard(props) {
                 </Card.Body>
                 <ListGroup>
                     <ListGroup.Item>
+                        <Rating hawker={hawker}/>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
                         <div>
                             <Card.Text>Location:</Card.Text>
                             {hawker.address_myenv}
@@ -92,16 +94,19 @@ export default function SingleHawkerCard(props) {
                 <Card.Footer>
                     <Button variant="primary" onClick={handleMapButtonClick}>View Map</Button>
                     <FoodStallList
-                        name = {hawker.name}
-                        photourl = {hawker.photourl}
-                        hawkerserial = {hawker.serialno}
-                    />                </Card.Footer>
+                        name={hawker.name}
+                        photourl={hawker.photourl}
+                        hawkerserial={hawker.serialno}
+                    /> </Card.Footer>
             </Card>
             {showMap && (
                 <div>
                     <div className="map-shadow" onClick={handleCloseMap}/>
                     <div className="map-overlay">
-                        <GoogleMap markersData={[{lat: parseFloat(hawker.latitude_hc), lng: parseFloat(hawker.longitude_hc)}]} />
+                        <GoogleMap markersData={[{
+                            lat: parseFloat(hawker.latitude_hc),
+                            lng: parseFloat(hawker.longitude_hc)
+                        }]}/>
                     </div>
                 </div>
             )}
