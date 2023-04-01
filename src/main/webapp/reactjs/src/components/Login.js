@@ -24,11 +24,13 @@ export default class Login extends Component {
         event.preventDefault();
 
         const user = {username: this.state.username, email: "test@gmail.com", password: this.state.password};
-        sessionStorage.setItem("username", this.state.username);
         axios.post("http://localhost:8080/api/v1/user/login", user)
             .then((response) => {
                 if (response.data === "success") {
                     sessionStorage.setItem("isLoggedIn", "true");
+                    sessionStorage.setItem("username", user.username);
+                    // alert("username: " + sessionStorage.getItem("username"));
+                    // alert("isLoggedIn: " + sessionStorage.getItem("isLoggedIn"));
                     window.location.href = "/welcome";
                 } else {
                     this.setState({"show": true});

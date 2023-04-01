@@ -23,7 +23,8 @@ export default class Update extends Component {
     submitUser=event=>{
         event.preventDefault();
 
-        const user = {username: this.state.username, email: "test@gmail.com", password: this.state.password};
+        // it won't change email
+        const user = {username: sessionStorage.getItem("username"), email: "random@gmail.com", password: this.state.password};
 
         axios.post("http://localhost:8080/api/v1/user/update", user)
             .then((response) =>{
@@ -57,12 +58,12 @@ export default class Update extends Component {
                     <Card.Header>Update</Card.Header>
                     <Form onReset={this.resetForm} onSubmit={this.submitUser} id="registerId">
                         <Card.Body>
-                            <Form.Group className="mb-3" controlId="formUsername">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control required autoComplete="off"
-                                              type="test" name="username" placeholder="Enter username"
-                                              onChange={this.userChange} value={username} />
-                            </Form.Group>
+                            {/*<Form.Group className="mb-3" controlId="formUsername">*/}
+                            {/*    <Form.Label>Username</Form.Label>*/}
+                            {/*    <Form.Control required autoComplete="off"*/}
+                            {/*                  type="test" name="username" placeholder="Enter username"*/}
+                            {/*                  onChange={this.userChange} value={username} />*/}
+                            {/*</Form.Group>*/}
 
                             <Form.Group className="mb-3" controlId="formPassword">
                                 <Form.Label>New Password</Form.Label>
