@@ -28,6 +28,7 @@ function App() {
             <Row>
                 <Col lg={12} style={marginTop}>
                     <Routes>
+                        <Route path="/" element={<Welcome/>}/>
                         {/*<Route path="/add" component={Hawker}/>*/}
                         <Route path="/welcome" element={<Welcome/>}/>
                         <Route path="/list" element={<HawkerList/>}/>
