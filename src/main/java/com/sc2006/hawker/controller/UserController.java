@@ -32,21 +32,29 @@ public class UserController {
 
     @PostMapping("/register")
     public void createNewAccount(@RequestBody User user) {
-        userService.addNewUser(user);
+        boolean exist = userService.addNewUser(user);
+        if (exist==true)
+            return new ResponseEntity<String>("success", HttpStatus.OK);
+        else
+            return new ResponseEntity<String> (HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/update")
     public void updateUserAccount(@RequestBody User user) {
-        userService.updateUser(user);
+        boolean exist = userService.updateUser(user);
+        if (exist==true)
+            return new ResponseEntity<String>("success", HttpStatus.OK);
+        else
+            return new ResponseEntity<String> (HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> loginAccount(@RequestBody User user) {
         boolean exist = userService.loginUser(user);
-        if (exist)
-            return new ResponseEntity<String>("Welcome back!", HttpStatus.OK);
+        if (exist==true)
+            return new ResponseEntity<String>("success", HttpStatus.OK);
         else
-            return new ResponseEntity<String>("Login failed", HttpStatus.OK);
+            return new ResponseEntity<String> (HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/delete")
