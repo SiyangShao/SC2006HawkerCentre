@@ -3,10 +3,7 @@ import React, {useEffect, useState} from 'react';
 import "./FoodStallList.css"
 import HawkerList from "./HawkerList";
 
-import {Row, Container, InputGroup, FormControl, Button, Modal, Card, ListGroup} from 'react-bootstrap';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
-import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@fortawesome/free-solid-svg-icons";
+import { Container, Button, Modal } from 'react-bootstrap';
 
 import axios from 'axios';
 
@@ -17,23 +14,32 @@ import EditReviewButton from "./models/EditReviewButton";
 export default function FoodStallList(props) {
 
     const [foodstalls, getFoodstalls] = useState([]);
+    let hawkerSerialno = props.hawkerserial;
+    //console.log(hawker);
 
     //need to wait for data to load from backend or else page will not load
     const [isLoading, setIsLoading] = useState(true);
 
-    //can concat with other foodstall ids once database is updated
-    function getAllFoodStalls() {
-        axios.get("http://localhost:8080/api/v1/foodstalls/72")
+
+    //list of initialized hawker centres
+    //1,21,44,72
+    //adam road, beo crescent, eunos crescent, maxwell
+
+
+    //concat with corresponding serial no
+    function getAllFoodStalls(hawkerSerial) {
+        axios.get("http://localhost:8080/api/v1/foodstalls/" + hawkerSerial)
             .then(response => response.data)
             .then((data) => {
                 getFoodstalls(data)
             })
     }
 
-
+    //map according foodstalls from database
     useEffect(() => {
-        getAllFoodStalls();
+        getAllFoodStalls(hawkerSerialno);
     }, []);
+
 
 
     //modal popup useState
@@ -49,7 +55,7 @@ export default function FoodStallList(props) {
     }
     //debugging to check for above if the code ever breaks again
     //   console.log(isLoading);
-    console.log(foodstalls);
+   // console.log(foodstalls);
 
     const currentDate = new Date();
 
