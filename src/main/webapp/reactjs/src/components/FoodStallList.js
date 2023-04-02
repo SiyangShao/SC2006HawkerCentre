@@ -22,8 +22,9 @@ export default function FoodStallList(props) {
 
 
     //list of initialized hawker centres
-    //1,21,44,72
-    //adam road, beo crescent, eunos crescent, maxwell
+    //First page: 1,21,44 (adam road, beo crescent, eunos crescent)
+    // Second page: 72 (Newton food centre)
+    // For search bar: 77 (Maxwell food centre)
 
 
     //concat with corresponding serial no
