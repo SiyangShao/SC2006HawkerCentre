@@ -1,17 +1,27 @@
 import React from "react";
 
-import {Button, Col, Card, ListGroup} from "react-bootstrap";
+import {Col, Card, ListGroup} from "react-bootstrap";
 
 import "./SingleStallCard.css"
 import EditReviewButton from "./EditReviewButton";
 import EditReviewButtonForFoodStall from "./EditReviewButtonForFoodStall";
 import ViewFoodStallReviewButton from "./ViewFoodStallReviewButton";
 
-
+let checkTime = (foodstalls, currentDate) => {
+    let time = currentDate.getHours() + currentDate.getMinutes()/60;
+    let start = foodstalls.openingHours;
+    let end = foodstalls.closingHours;
+    if (time >= start && time <= end ){
+        return "OPEN";
+    }
+    else return "CLOSED";
+};
 export const singleStallCard = function (foodstall, currentDate, hawkerID, hawkerName) {
     if (foodstall.stallnumber === undefined) {
         console.log("Food stall number undefined!!! " + foodstall);
     }
+
+
     return (
         <Col key={foodstall.stallnumber}>
             <Card className="stall-card">
@@ -19,10 +29,11 @@ export const singleStallCard = function (foodstall, currentDate, hawkerID, hawke
                 <Card.Body>
                     <Card.Title>{foodstall.name}</Card.Title>
                     <Card.Text>#{foodstall.stallnumber}</Card.Text>
+                    <Card.Text>Status: {checkTime(foodstall, currentDate)}</Card.Text>
                 </Card.Body>
                 <ListGroup>
                     <ListGroup.Item>
-                        <Card.Text>{foodstall.openingHours}</Card.Text>
+                        <Card.Text>{foodstall.description}</Card.Text>
                     </ListGroup.Item>
                 </ListGroup>
                 <Card.Footer>

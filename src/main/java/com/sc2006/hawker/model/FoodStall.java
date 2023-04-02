@@ -33,6 +33,7 @@ public class FoodStall {
     private String photourl;
     private String description;
     private String openingHours;
+    private String closingHours;
     private String status;
 
     @DocumentReference
