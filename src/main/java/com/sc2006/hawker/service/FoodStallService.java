@@ -33,10 +33,10 @@ public class FoodStallService {
     }
 
     public FoodStall addNewFoodStall(FoodStall foodstall) {
-        /*
-        if (foodstallrepository.findByFsserialno(foodstall.getFsserialno()).isPresent()) {
-            throw new RuntimeException("The Fsserialno of the Food Stall already exists");
-        } */
+        Optional<FoodStall> foodstallrepo = foodstallrepository.findFoodStallByFsserialnoAndStallnumber(foodstall.getFsserialno(), foodstall.getStallnumber());
+        if (foodstallrepo.isPresent()) {
+            throw new RuntimeException("The Food Stall already exists (duplicate fsserialno and stall number)");
+        }
         return mongoTemplate.insert(foodstall);
     }
 
