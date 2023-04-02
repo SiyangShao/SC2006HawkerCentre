@@ -40,8 +40,8 @@ public class FoodStallService {
         return mongoTemplate.insert(foodstall);
     }
 
-    public void deleteFoodStall(String fsserialno) {
-        Optional<FoodStall> foodstall = foodstallrepository.findByFsserialno(fsserialno);
+    public void deleteFoodStall(String fsserialno, String stallnumber) {
+        Optional<FoodStall> foodstall = foodstallrepository.findFoodStallByFsserialnoAndStallnumber(fsserialno,stallnumber);
         if (foodstall.isPresent()) {
             foodstallrepository.delete(foodstall.get());
         } else {
@@ -50,7 +50,7 @@ public class FoodStallService {
     }
 
     public FoodStall updateFoodStall(Map<String, String> item) {
-        Optional<FoodStall> foodstall = foodstallrepository.findByFsserialno(item.get("fs_serial_no"));
+        Optional<FoodStall> foodstall = foodstallrepository.findFoodStallByFsserialnoAndStallnumber(item.get("fs_serial_no"), item.get("stall_number"));
         if (foodstall.isPresent()) {
             for (String key : item.keySet()) {
                 switch (key) {
@@ -59,6 +59,7 @@ public class FoodStallService {
                     case "stall_number" -> foodstall.get().setStallnumber(item.get(key));
                     case "description" -> foodstall.get().setDescription(item.get(key));
                     case "opening_hours" -> foodstall.get().setOpeningHours(item.get(key));
+                    case "closing_hours" -> foodstall.get().setClosingHours(item.get(key));
                     case "photourl" -> foodstall.get().setPhotourl(item.get(key));
                     case "status" -> foodstall.get().setStatus(item.get(key));
                 }

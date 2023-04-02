@@ -50,6 +50,6 @@ public class FoodStallController {
 
     @DeleteMapping("/delete")
     public void deleteFoodStall(@RequestBody Map<String, String> item) {
-        foodstallservice.deleteFoodStall(item.get("fs_serial_no"));
+        foodstallservice.deleteFoodStall(item.get("fs_serial_no"), item.get("stall_number"));
     }
 }
