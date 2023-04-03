@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+/* add a background picture */
+body {
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/815/737/246/abstract-1920x1200-nature-wallpaper-preview.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}

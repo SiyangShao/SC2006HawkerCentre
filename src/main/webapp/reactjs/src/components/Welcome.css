@@ -1,5 +1,6 @@
 .my-footer {
-    background-color: #f0e6e4; /* replace with your desired color */
+    background-color: rgb(33,37,41, 0.99);
+    height: 20px;
 }
 
 .container-fluid {
