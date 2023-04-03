@@ -40,6 +40,10 @@ export default class Nearest extends Component {
                     };
                     tempMarkers.push(tempMarker);
                 }
+                if(tempMarkers.length === 0){
+                    alert("No Nearby HawkerCentre Found!");
+                    window.location.reload();
+                }
                 this.setState({
                     hawkers: data,
                     markers: tempMarkers
