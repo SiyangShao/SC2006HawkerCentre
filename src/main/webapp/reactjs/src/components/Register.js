@@ -77,7 +77,7 @@ export default class Register extends Component {
                             <Form.Group className="mb-3" controlId="formPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control required autoComplete="off"
-                                              type="test" name="password" placeholder="Password"
+                                              type="password" name="password" placeholder="Password"
                                               onChange={this.userChange} value={password}/>
                             </Form.Group>
 
