@@ -54,7 +54,7 @@ export default class Update extends Component {
                 <div style={{"display":this.state.show ? "block" : "none"}}>
                     <MyToast children = {{show:this.state.show, message:"Username Incorrect"}}/>
                 </div>
-                <Card className={"border border-dark bg-dark text-white"} style={{width: '30rem'}}>
+                <Card className="login-card" style={{width: '30rem'}}>
                     <Card.Header>Update</Card.Header>
                     <Form onReset={this.resetForm} onSubmit={this.submitUser} id="registerId">
                         <Card.Body>

@@ -53,7 +53,7 @@ export default class Register extends Component {
                 <div style={{"display":this.state.show ? "block" : "none"}}>
                     <MyToast children = {{show:this.state.show, message:"Account already exist"}}/>
                 </div>
-                <Card className={"border border-dark bg-dark text-white"} style={{width: '30rem'}}>
+                <Card className="login-card" style={{width: '30rem'}}>
                     <Card.Header>Register</Card.Header>
                     <Form onReset={this.resetForm} onSubmit={this.submitUser} id="registerId">
                         <Card.Body>
