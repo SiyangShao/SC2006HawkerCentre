@@ -3,6 +3,7 @@ import {Form, Button, Card} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUndo, faUser, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import MyToast from './MyToast';
+import "./Login.css"
 
 import axios from 'axios';
 
@@ -57,7 +58,7 @@ export default class Login extends Component {
                 <div style={{"display": this.state.show ? "block" : "none"}}>
                     <MyToast children={{show: this.state.show, message: "Error "}}/>
                 </div>
-                <Card className={"border border-dark bg-dark text-white"} style={{width: '30rem'}}>
+                <Card className="login-card" style={{width: '30rem'}}>
                     <Card.Header>Login</Card.Header>
                     <Form onReset={this.resetForm} onSubmit={this.submitUser} id="registerId">
                         <Card.Body>
@@ -71,7 +72,7 @@ export default class Login extends Component {
                             <Form.Group className="mb-3" controlId="formPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control required autoComplete="off"
-                                              type="test" name="password" placeholder="Password"
+                                              type="password" name="password" placeholder="Password"
                                               onChange={this.userChange} value={password}/>
                             </Form.Group>
 
