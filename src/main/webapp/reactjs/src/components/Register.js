@@ -27,7 +27,7 @@ export default class Register extends Component {
         axios.post("http://localhost:8080/api/v1/user/register", user)
             .then((response) =>{
                 if(response.data === "success"){
-                    window.location.href = "/welcome";
+                    window.location.href = "/login";
                 }
                 else{
                     this.setState({"show":true});
