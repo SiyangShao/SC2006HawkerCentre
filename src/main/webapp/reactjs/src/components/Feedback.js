@@ -1,6 +1,8 @@
 // import React from 'react';
 //
 // import {Form, Button} from 'react-bootstrap'
+import "./Feedback.css";
+import {Card} from "react-bootstrap";
 //
 // class Feedback extends React.Component {
 //
@@ -20,11 +22,12 @@ function Feedback() {
 
     return (
         <div>
+            <Card className="feed-card">
             <h1>Feedback Form</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Please provide your feedback:</Form.Label>
-                    <Form.Control type="text" value={feedback} onChange={(e) => setFeedback(e.target.value)}/>
+                    <Form.Control type="text" className="feed-back-input" value={feedback} onChange={(e) => setFeedback(e.target.value)}/>
                 </Form.Group>
                 <Button type="submit" onClick={
                     () => {
@@ -41,6 +44,7 @@ function Feedback() {
                     }
                 }>Submit</Button>
             </Form>
+                </Card>
         </div>
     );
 }
