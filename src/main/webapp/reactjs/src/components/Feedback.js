@@ -27,7 +27,7 @@ function Feedback() {
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Please provide your feedback:</Form.Label>
-                    <Form.Control type="text" className="feed-back-input" value={feedback} onChange={(e) => setFeedback(e.target.value)}/>
+                    <Form.Control type="text" value={feedback} onChange={(e) => setFeedback(e.target.value)}/>
                 </Form.Group>
                 <Button type="submit" onClick={
                     () => {
