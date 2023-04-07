@@ -52,7 +52,7 @@ export default function FoodStallList(props) {
     //yes this is necessary
     if (isLoading) {
         if (foodstalls[0] !== undefined) setIsLoading(false);
-        return <div>Loading...</div>;
+        // return <div>Loading...</div>;
     }
     //debugging to check for above if the code ever breaks again
     //   console.log(isLoading);
