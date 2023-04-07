@@ -54,7 +54,6 @@ export default function EditFoodStallReview() {
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="rating">
                         <Form.Label>Rating (out of 5):</Form.Label>
-                        {/* 使用react-rating-stars-component替代Form.Control，并添加样式 */}
                         <div style={{ display: "flex", justifyContent: "center" }}>
                             <RatingStars
                                 count={5}
