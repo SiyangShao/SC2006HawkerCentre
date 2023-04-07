@@ -1,0 +1,29 @@
+.enter-review-card {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 40px; /* 上边距 */
+    padding-bottom: 20px; /* 下边距 */
+}
+
+.enter-review-card h1,
+.enter-review-card h3 {
+    margin-top: 20px;
+}
+
+.enter-review-card form, select {
+    width: 80%;
+    margin: auto;
+    /*margin: 40px auto auto;*/
+}
+
+.review-card textarea {
+    resize: none;
+    height: 100px;
+    width: 80%;
+    margin: auto;
+}
+
+.review-card button[type="submit"] {
+    margin-top: 20px;
+}
