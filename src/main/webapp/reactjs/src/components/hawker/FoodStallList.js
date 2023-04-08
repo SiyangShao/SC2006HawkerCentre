@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
 import "./FoodStallList.css"
-import HawkerList from "../hawkerlist/HawkerList";
 
 import { Container, Button, Modal } from 'react-bootstrap';
 

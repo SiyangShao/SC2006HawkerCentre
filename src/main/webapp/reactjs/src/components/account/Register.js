@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Button, Card} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUndo, faPlusSquare, faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import {faUndo, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import MyToast from '../components/MyToast';
 
 import axios from 'axios';

@@ -10,7 +10,6 @@ import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@for
 
 import axios from 'axios';
 import SingleHawkerCard from "../hawker/SingleHawkerCard.js";
-import GoogleMap from "../map/GoogleMap.js";
 
 
 export default class HawkerList extends Component {
