@@ -1,10 +1,10 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 
 import "./Nearest.css"
 
 import {Row, Container, InputGroup, FormControl, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
+import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios';
 import SingleHawkerCard from "../hawker/SingleHawkerCard";

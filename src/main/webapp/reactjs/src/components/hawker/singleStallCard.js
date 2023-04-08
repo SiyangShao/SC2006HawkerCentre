@@ -3,7 +3,6 @@ import React from "react";
 import {Col, Card, ListGroup} from "react-bootstrap";
 
 import "./SingleStallCard.css"
-import EditReviewButton from "../reviews/EditReviewButton";
 import EditReviewButtonForFoodStall from "../reviews/EditReviewButtonForFoodStall";
 import ViewFoodStallReviewButton from "../reviews/ViewFoodStallReviewButton";
 

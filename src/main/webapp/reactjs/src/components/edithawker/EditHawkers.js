@@ -1,16 +1,9 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import "../hawkerlist/HawkerList.css"
 import "../hawkerlist/SearchBar.css"
 
-import {Row, Container, InputGroup, FormControl, Button} from 'react-bootstrap';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
-import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@fortawesome/free-solid-svg-icons";
-
 import axios from 'axios';
-import SingleHawkerCard from "../hawker/SingleHawkerCard.js";
-import GoogleMap from "../map/GoogleMap.js";
 import ListAllHawkersFromFav from "../fav/ListAllHawkersFromFav";
 
 
