@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 
 import "./FoodStallList.css"
-import HawkerList from "./HawkerList";
+import HawkerList from "../hawkerlist/HawkerList";
 
 import { Container, Button, Modal } from 'react-bootstrap';
 
 import axios from 'axios';
 
-import {singleStallCard} from "./models/singleStallCard";
-import HawkerCentreReview from "./models/HawkerCentreReview";
-import EditReviewButton from "./models/EditReviewButton";
+import {singleStallCard} from "./singleStallCard";
+import HawkerCentreReview from "../reviews/HawkerCentreReview";
+import EditReviewButton from "../reviews/EditReviewButton";
 
 export default function FoodStallList(props) {
 

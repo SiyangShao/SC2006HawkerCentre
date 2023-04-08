@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
-import SingleReviewCard from "./SingleReviewCard";
+import SingleReviewCard from "../hawker/SingleReviewCard";
 
-import "../FoodStallList.css"
+import "../hawker/FoodStallList.css"
 
 export default function HawkerReview({hawkerid}) {
     const [reviews, setReviews] = useState(null);

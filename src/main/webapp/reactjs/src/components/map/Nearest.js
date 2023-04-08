@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios';
-import SingleHawkerCard from "./SingleHawkerCard";
+import SingleHawkerCard from "../hawker/SingleHawkerCard";
 import GoogleMap from "./GoogleMap";
 
 

@@ -2,7 +2,7 @@ import React, {Component, useContext, useState} from 'react';
 import {Form, Button, Card} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUndo, faUser, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
-import MyToast from './MyToast';
+import MyToast from '../components/MyToast';
 import "./Login.css"
 
 import axios from 'axios';

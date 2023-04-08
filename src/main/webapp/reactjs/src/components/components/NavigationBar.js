@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import './NavigationBar.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus, faSignOutAlt, faPenToSquare, faUser} from "@fortawesome/free-solid-svg-icons";
-import {confirmLogout} from "./Logout";
+import {confirmLogout} from "../account/Logout";
 
 function NavigationBarRight() {
     // get current user name

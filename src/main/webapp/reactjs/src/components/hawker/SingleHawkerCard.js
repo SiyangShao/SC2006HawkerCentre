@@ -3,10 +3,10 @@ import React, {useState} from "react";
 import {Button, Col, Card, ListGroup} from "react-bootstrap";
 
 import "./SingleHawkerCard.css"
-import FoodStallList from "../FoodStallList.js";
-import GoogleMap from "./GoogleMap.js";
-import Rating from "./Rating";
-import ToggleFavouriteStatus from "./ToggleFavouriteStatus";
+import FoodStallList from "./FoodStallList.js";
+import GoogleMap from "../map/GoogleMap.js";
+import Rating from "../reviews/Rating";
+import ToggleFavouriteStatus from "../fav/ToggleFavouriteStatus";
 
 // function for getting quarter # of current date
 let currentQuarter = (date) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Welcome.css'
+import '../welcome/Welcome.css'
 import {Navbar, Container, Col} from "react-bootstrap";
 
 class Footer extends React.Component {

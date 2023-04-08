@@ -1,7 +1,7 @@
 import React, {Component, useEffect, useState} from 'react';
 
-import "./HawkerList.css"
-import "./models/SearchBar.css"
+import "../hawkerlist/HawkerList.css"
+import "../hawkerlist/SearchBar.css"
 
 import {Row, Container, InputGroup, FormControl, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -9,9 +9,9 @@ import {faSearch, faTimes, faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {faStepBackward, faStepForward, faFastForward, faFastBackward} from "@fortawesome/free-solid-svg-icons";
 
 import axios from 'axios';
-import SingleHawkerCard from "./models/SingleHawkerCard.js";
-import GoogleMap from "./models/GoogleMap.js";
-import ListAllHawkersFromFav from "./ListAllHawkersFromFav";
+import SingleHawkerCard from "../hawker/SingleHawkerCard.js";
+import GoogleMap from "../map/GoogleMap.js";
+import ListAllHawkersFromFav from "../fav/ListAllHawkersFromFav";
 
 
 export default function EditHawkers() {

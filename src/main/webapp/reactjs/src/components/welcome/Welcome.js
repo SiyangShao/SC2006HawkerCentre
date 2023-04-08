@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Welcome.css'
 import { Container, Row, Col } from 'react-bootstrap';
-import GoogleMap from "./models/GoogleMap";
+import GoogleMap from "../map/GoogleMap";
 
 function Welcome() {
     return (

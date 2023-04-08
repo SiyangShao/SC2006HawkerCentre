@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import SingleReviewCard from "./SingleReviewCard";
+import SingleReviewCard from "../hawker/SingleReviewCard";
 
 export default function ViewFoodStallReview() {
     const hawkerID = sessionStorage.getItem("hawkerID");

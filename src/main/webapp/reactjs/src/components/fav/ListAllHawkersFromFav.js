@@ -3,7 +3,7 @@ import axios from "axios";
 import {Container, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUtensils} from "@fortawesome/free-solid-svg-icons";
-import SingleHawkerCard from "./models/SingleHawkerCard";
+import SingleHawkerCard from "../hawker/SingleHawkerCard";
 
 export default function ListAllHawkersFromFav({hawkerIDs}) {
     const [hawkers, setHawkers] = useState([]);

@@ -4,19 +4,19 @@ import './App.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-import NavigationBar from "./components/NavigationBar";
-import Welcome from "./components/Welcome"
-import Footer from "./components/Footer"
-import HawkerList from "./components/HawkerList"
-import Nearest from "./components/models/Nearest";
-import Feedback from "./components/Feedback"
-import EditHawkers from "./components/EditHawkers";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Update from "./components/Update";
-import EditHawkerCentreReview from "./components/models/EditHawkerCentreReview";
-import EditFoodStallReview from "./components/models/EditFoodStallReview";
-import ViewFoodStallReview from "./components/models/ViewFoodStallReview";
+import NavigationBar from "./components/components/NavigationBar";
+import Welcome from "./components/welcome/Welcome"
+import Footer from "./components/components/Footer"
+import HawkerList from "./components/hawkerlist/HawkerList"
+import Nearest from "./components/map/Nearest";
+import Feedback from "./components/feedback/Feedback"
+import EditHawkers from "./components/edithawker/EditHawkers";
+import Login from "./components/account/Login";
+import Register from "./components/account/Register";
+import Update from "./components/account/Update";
+import EditHawkerCentreReview from "./components/reviews/EditHawkerCentreReview";
+import EditFoodStallReview from "./components/reviews/EditFoodStallReview";
+import ViewFoodStallReview from "./components/reviews/ViewFoodStallReview";
 
 function App() {
     const marginTop={
