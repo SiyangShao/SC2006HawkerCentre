@@ -39,7 +39,7 @@ class NavigationBar extends React.Component {
                     <span className="my-logo">
                         <Link to={"welcome"} className="navbar-brand">
                             <img src="https://cdn-icons-png.flaticon.com/512/1045/1045703.png" width="25" height="25"
-                                 alt="brand"/>Hawkewhen</Link>
+                                 alt="brand"/>HawkerWhen</Link>
                     </span>
                     <Nav className="me-auto">
                         <Link to={"list"} className="navbar-brand">Hawker List</Link>

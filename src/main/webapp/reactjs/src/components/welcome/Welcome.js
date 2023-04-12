@@ -9,7 +9,7 @@ function Welcome() {
             <Row>
                 <Col>
                     <div className="my-container py-5">
-                        <h1 className="display-4">Welcome to Hawkewhen!</h1>
+                        <h1 className="display-4">Welcome to HawkerWhen!</h1>
                         <p className="lead">
                             Don't waste your time going Hawkers that are NOT open!
                         </p>
