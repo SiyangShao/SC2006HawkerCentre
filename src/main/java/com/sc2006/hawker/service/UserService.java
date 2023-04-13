@@ -34,18 +34,30 @@ public class UserService {
         return userDetails;
     }
 
-    public boolean addNewUser(User user) {
+    public int addNewUser(User user) {
         Optional<User> userByUsername = userRepository.findUserByUsernameOrEmail(user.getUsername(), user.getEmail());
-        if (userByUsername.isEmpty()) {
-            boolean validEmail = isValidEmail(user.getEmail());
-            if (validEmail) {
-                userRepository.save(user);
-                System.out.println("Valid email.");
-                return true;
+        Optional<User> email = userRepository.findUserByEmail(user.getEmail());
+        Optional<User> username = userRepository.findUserByUsername(user.getUsername());
+
+        boolean validEmail = isValidEmail(user.getEmail());
+        if(validEmail){
+            if(email.isEmpty()){
+                if(username.isEmpty()){
+                    userRepository.save(user);
+                    System.out.println("Account successfully created.");
+                    return 4; //account created
+                }else{
+                    System.out.println("Username already exist.");
+                    return 3; //username already exists
+                }
+            }else{
+                System.out.println("Email already exist.");
+                return 2; //email already exists
             }
+        }else{
+            System.out.println("Invalid email.");
+            return 1; //invalid email
         }
-        System.out.println("Invalid email.");
-        return false;
     }
 
     @Transactional
