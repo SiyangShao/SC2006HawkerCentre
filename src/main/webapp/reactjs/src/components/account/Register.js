@@ -29,7 +29,18 @@ export default class Register extends Component {
                 if(response.data === "success"){
                     window.location.href = "/login";
                 }
-                else{
+                else if(response.data === "emailFormat"){
+                    sessionStorage.setItem("register", "Incorrect email format");
+                    this.setState({"show":true});
+                    setTimeout(() => this.setState({"show":false}), 3000);
+                }
+                else if(response.data === "email"){
+                    sessionStorage.setItem("register", "Email already exist");
+                    this.setState({"show":true});
+                    setTimeout(() => this.setState({"show":false}), 3000);
+                }
+                else if(response.data === "username"){
+                    sessionStorage.setItem("register", "Username already exist");
                     this.setState({"show":true});
                     setTimeout(() => this.setState({"show":false}), 3000);
                 }
@@ -47,11 +58,12 @@ export default class Register extends Component {
 
     render() {
         const {username, email, password} = this.state;
+        const msg = sessionStorage.getItem("register");
 
         return (
             <div>
                 <div style={{"display":this.state.show ? "block" : "none"}}>
-                    <MyToast children = {{show:this.state.show, message:"Account already exist"}}/>
+                    <MyToast children = {{show:this.state.show, message: msg}}/>
                 </div>
                 <Card className="login-card" style={{width: '30rem'}}>
                     <Card.Header>Register</Card.Header>
