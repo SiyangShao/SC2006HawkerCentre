@@ -32,11 +32,15 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> createNewAccount(@RequestBody User user) {
-        boolean exist = userService.addNewUser(user);
-        if (exist==true)
+        int exist = userService.addNewUser(user);
+        if (exist==4)
             return new ResponseEntity<String>("success", HttpStatus.OK);
+        else if (exist==1)
+            return new ResponseEntity<String>("emailFormat", HttpStatus.OK);
+        else if (exist==2)
+            return new ResponseEntity<String>("email", HttpStatus.OK);
         else
-            return new ResponseEntity<String> (HttpStatus.NO_CONTENT);
+            return new ResponseEntity<String>("username", HttpStatus.OK);
     }
 
     @PostMapping("/update")
